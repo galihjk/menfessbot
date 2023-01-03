@@ -1,2 +1,3 @@
 <?php
-echo include('config.php')['webhook'];
+$config = include('/config.php');
+print_r($config);
