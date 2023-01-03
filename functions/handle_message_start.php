@@ -23,7 +23,7 @@ function handle_message_start($botdata){
         ."(Pesan)\n"
         ."\n"
         ."Contoh:\n"
-        ."<pre>#random\n\nBla bla bla...</pre>\n";
+        ."<pre>#random\n\nBla bla bla...</pre>\n...";
         f("bot_kirim_perintah")("sendMessage",[
             "chat_id"=>$chat_id,
             "text"=>$textkirim,
@@ -32,6 +32,10 @@ function handle_message_start($botdata){
                 ['👤 Profil','profil'],
             ]),
         ]);
+
+        f("db_connect")();
+        file_put_contents("tesq",print_r(mysql_query("select * from users"),true));
+
         return true;
     }
     return false;
