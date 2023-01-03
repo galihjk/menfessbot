@@ -1,7 +1,7 @@
 <?php
 function handle_message_start($botdata){
     f("db_connect")();
-    file_put_contents("tesq",print_r(mysql_query("select * from users"),true));
+    file_put_contents("tesq",print_r(mysqli_query("select * from users"),true));
     $channel = f("get_config")("channel");
     $channel_url = f("channel_url")();
     $botuname = f("get_config")("botuname");
