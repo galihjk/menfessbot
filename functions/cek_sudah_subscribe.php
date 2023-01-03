@@ -1,17 +1,49 @@
 <?php
 function cek_sudah_subscribe($userid){
     $channel = f("get_config")("channel");
-    $chatmember = f("bot_kirim_perintah")("getChatMember",[
+    $group = f("get_config")("group");
+    $chatmemberchannel = f("bot_kirim_perintah")("getChatMember",[
         'chat_id'=>$channel,
         'user_id'=>$userid,
     ]);
-    $status = $chatmember["result"]["status"];
-    if(in_array($status,["restricted","left","kicked"])){
+    if(in_array($chatmemberchannel["result"]["status"],["restricted","left","kicked"])){
+        $chatmemberchanneljoin = false;
+    }
+    else{
+        $chatmemberchanneljoin = true;
+    }
+    $chatmembergroup = f("bot_kirim_perintah")("getChatMember",[
+        'chat_id'=>$group,
+        'user_id'=>$userid,
+    ]);;
+    if(in_array($chatmembergroup["result"]["status"],["restricted","left","kicked"])){
+        $chatmembergroupjoin = false;
+    }
+    else{
+        $chatmembergroupjoin = true;
+    }
+    if($chatmemberchanneljoin and $chatmembergroupjoin){
+        return true;
+    }
+    else{
+        $harusjoin = [];
+        if(!$chatmemberchanneljoin) $harusjoin[] = $channel;
+        if(!$chatmembergroupjoin){
+            $chatinfo = f("bot_kirim_perintah")("getChat",[
+                "chat_id"=>$group,
+            ]);
+            if(!empty($chatinfo['result']['username'])){
+                $harusjoin[] = "@" . $chatinfo['result']['username'];
+            }
+            else{
+                $harusjoin[] = $chatinfo['result']['title'];
+            }
+            
+        } 
         f("bot_kirim_perintah")("sendMessage",[
             "chat_id"=>$userid,
-            "text"=>"Join $channel dulu yuk! Abis itu ke sini lagi.. :D \n/start",
+            "text"=>"Join ".implode(" dan ",$harusjoin)." dulu yaa! Abis itu ke sini lagi.. :D \n/start",
         ]);
         return false;
     }
-    return true;
 }
