@@ -8,7 +8,8 @@ function handle_callback_query_profil($botdata){
         $chat_id = $botdata["message"]["chat"]["id"];
         $userid = f("str_dbq")($botdata["message"]["from"]["id"],true);
         $data_user = f("db_select_one")("select * from users where id = $userid");
-        $textkirim = "ini".print_r($data_user, true);
+        $textkirim = "ini".print_r($botdata, true);
+        // $textkirim = "ini".print_r($data_user, true);
         f("bot_kirim_perintah")("editMessageText",[
             'chat_id'=>$chat_id,
             'message_id'=>$message_id,
