@@ -8,4 +8,3 @@ function f($f){
     file_put_contents("log/f_not_exist_".date("Y-m-d-H-i").".txt", $f);
     return false;
 }
-$global_config = include("config.php");
