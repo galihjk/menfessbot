@@ -3,6 +3,7 @@ function handle_message($botdata){
     if(f("is_private")($botdata)){
         $chat_id = $botdata["chat"]["id"];
         if(f("cek_sudah_subscribe")($chat_id)){
+            if(!empty($botdata["from"]))f("update_user")($botdata["from"]);
             f("handle_message_functions")($botdata,[
                 "handle_message_start",
                 // "handle_message_send_text",

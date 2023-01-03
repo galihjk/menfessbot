@@ -8,3 +8,4 @@ $jenis_update = [
 
 f("handle_update_sesuai_jenis")($jenis_update);
 
+f("db_disconnet")();

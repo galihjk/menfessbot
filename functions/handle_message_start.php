@@ -1,17 +1,6 @@
 <?php
 function handle_message_start($botdata){
-    $db_connect = f("db_connect")();
-    $sql = "select * from users";
-    $data = [];
-    if ($result = $db_connect -> query($sql)) {
-        while ($row = $result -> fetch_row()) {
-            $data[] = $row;
-            // printf ("%s (%s)\n", $row[0], $row[1]);
-        }
-        $result -> free_result();
-    }
-    $db_connect -> close();
-    file_put_contents("tesq",print_r($data,true));
+    file_put_contents("tesq2",print_r(f("db_q")("select * from user"),true));
     $channel = f("get_config")("channel");
     $channel_url = f("channel_url")();
     $botuname = f("get_config")("botuname");
