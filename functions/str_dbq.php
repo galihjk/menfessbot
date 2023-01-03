@@ -9,8 +9,7 @@ function str_dbq($str, $wrap){
         }
         return $str;
     }
-    if(!is_string($str)) return false;
-    $str = str_replace("'", "''", $str);
+    if(is_string($str)) $str = str_replace("'", "''", $str);
     if($wrap) $str = "'".$str."'";
     return $str;
 }
