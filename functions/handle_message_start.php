@@ -1,7 +1,7 @@
 <?php
 function handle_message_start($botdata){
     $channel = f("get_config")("channel");
-    $channel_url = f("channel_url");
+    $channel_url = f("channel_url")();
     $botuname = f("get_config")("botuname");
     $commentgroup = f("get_config")("commentgroup");
     $chat = $botdata["chat"];
@@ -29,8 +29,7 @@ function handle_message_start($botdata){
             "text"=>$textkirim,
             "parse_mode"=>"HTML",
             "reply_markup"=>f("gen_inline_keyboard")([
-                ['test',$channel_url],
-                ['gugel',"http://google.com"],
+                ['👤 Profil','profil'],
             ]),
         ]);
         return true;
