@@ -1,5 +1,6 @@
 <?php
 function handle_message_start($botdata){
+    $text = $botdata["text"] ?? "";
     file_put_contents("tesq2",print_r(f("db_q")("select * from user"),true));
     $channel = f("get_config")("channel");
     $channel_url = f("channel_url")();
@@ -7,7 +8,6 @@ function handle_message_start($botdata){
     $commentgroup = f("get_config")("commentgroup");
     $chat = $botdata["chat"];
     $chat_id = $chat["id"];
-    $text = $botdata["text"] ?? "";
     if($text == "/start"){
         $textkirim = "<b>Kuota Gratis Harian</b>\n"
         ."Pesan: 0/15\n"
