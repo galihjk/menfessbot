@@ -6,6 +6,10 @@ function cek_sudah_subscribe($userid){
         'chat_id'=>$channel,
         'user_id'=>$userid,
     ]);
+    if(empty($chatmemberchannel["result"]["status"])){
+        file_put_contents("LAST_ERROR.txt","Error empty status1");
+        die("Error empty status");
+    }
     if(in_array($chatmemberchannel["result"]["status"],["restricted","left","kicked"])){
         $chatmemberchanneljoin = false;
     }
@@ -16,6 +20,10 @@ function cek_sudah_subscribe($userid){
         'chat_id'=>$group,
         'user_id'=>$userid,
     ]);;
+    if(empty($chatmembergroup["result"]["status"])){
+        file_put_contents("LAST_ERROR.txt","Error empty status2");
+        die("Error empty status2");
+    }
     if(in_array($chatmembergroup["result"]["status"],["restricted","left","kicked"])){
         $chatmembergroupjoin = false;
     }

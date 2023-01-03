@@ -12,7 +12,7 @@ function handle_message_start($botdata){
         ."Pesan: 0/15\n"
         ."Media: 0/0\n"
         ."\n"
-        ."Kirim pesan kalian disini maka akan otomatis ter post di ch $channel\n"
+        ."Kirim pesan kalian disini maka akan otomatis ter post di ch $channel $channel_url\n"
         ."\n"
         ."❌ Spam\n"
         ."❌ Porn\n"
