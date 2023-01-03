@@ -68,9 +68,6 @@ function bot_kirim_stream($bot_token,$perintah,$data){
 }
 
 function bot_kirim_curl($bot_token,$perintah,$data){
-	if(!is_countable($data)){
-		file_put_contents("ERRORCOUNTABLE.txt",print_r([$bot_token,$perintah,$data],1));
-	}
 	if(empty($data)) $data = [];
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL,bot_url_kirim($bot_token,$perintah));

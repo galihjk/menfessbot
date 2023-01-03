@@ -2,7 +2,6 @@
 function handle_message_start($botdata){
     $text = $botdata["text"] ?? "";
     if($text == "/start"){
-        file_put_contents("tesq2",print_r(f("db_q")("select * from users"),true));
         $channel = f("get_config")("channel");
         $channel_url = f("channel_url")();
         $botuname = f("get_config")("botuname");

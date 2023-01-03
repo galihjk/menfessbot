@@ -1,7 +1,6 @@
 <?php
 function update_user($userdata){
     $userdata = f("str_dbq")($userdata,true);
-    file_put_contents("tesq4.txt",print_r($userdata,true));
     $id = $userdata["id"];
     $first_name = $userdata["first_name"] ?? "''";
     $last_name = $userdata["last_name"] ?? "''";
@@ -12,6 +11,5 @@ function update_user($userdata){
         ON DUPLICATE KEY UPDATE 
         first_name=$first_name, last_name=$last_name, username=$username;
     ";
-    file_put_contents("tesq4q.txt",print_r($q,true));
     f("db_q")($q);
 }
