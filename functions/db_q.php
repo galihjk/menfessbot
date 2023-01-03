@@ -11,7 +11,7 @@ function db_q($q){
         }
     }
     else{
-        file_put_contents("ERROR DBQ ".date("YmdHis").".txt","$q\n\n".$mysqli->error);
+        file_put_contents("log/ERROR DBQ ".date("YmdHis").".txt","$q\n\n".$mysqli->error);
     }
     return $data;
 }

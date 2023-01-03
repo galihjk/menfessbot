@@ -1,14 +1,14 @@
 <?php
 function handle_message_start($botdata){
     $text = $botdata["text"] ?? "";
-    file_put_contents("tesq2",print_r(f("db_q")("select * from user"),true));
-    $channel = f("get_config")("channel");
-    $channel_url = f("channel_url")();
-    $botuname = f("get_config")("botuname");
-    $commentgroup = f("get_config")("commentgroup");
-    $chat = $botdata["chat"];
-    $chat_id = $chat["id"];
     if($text == "/start"){
+        file_put_contents("tesq2",print_r(f("db_q")("select * from users"),true));
+        $channel = f("get_config")("channel");
+        $channel_url = f("channel_url")();
+        $botuname = f("get_config")("botuname");
+        $commentgroup = f("get_config")("commentgroup");
+        $chat = $botdata["chat"];
+        $chat_id = $chat["id"];
         $textkirim = "<b>Kuota Gratis Harian</b>\n"
         ."Pesan: 0/15\n"
         ."Media: 0/0\n"
