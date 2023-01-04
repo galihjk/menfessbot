@@ -11,14 +11,17 @@ function handle_callback_query_topup($botdata){
         $chat_id = $botdata["message"]["chat"]["id"];
         $data_user = f("get_user")($botdata["from"]["id"]);
         
-        $textkirim = "Mau top up berapa koin? *jawab dengan angka\n\n/start - menu utama";
+        $textkirim = "Silakan hubungi admin dan sampaikan bahwa id anda adalah: <pre>".$botdata["from"]["id"]."</pre>";
 
         f("bot_kirim_perintah")("editMessageText",[
             'chat_id'=>$chat_id,
             'message_id'=>$message_id,
             'text'=>$textkirim,
             "parse_mode"=>"HTML",
-            'reply_markup'=>['force_reply'=>true],
+            'reply_markup'=>f("gen_inline_keyboard")([
+                ['⬅️ Kembali', 'profil'],
+                ['🏠 Menu Utama', 'home'],
+            ]),
         ]);
         return true;
     }

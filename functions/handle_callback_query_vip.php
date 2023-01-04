@@ -12,14 +12,16 @@ function handle_callback_query_vip($botdata){
         $data_user = f("get_user")($botdata["from"]["id"]);
         
         $textkirim = "<b>Fitur VIP:</b>\n";
-        $textkirim .= "Unlimited bla bla bla\n";
+        $textkirim .= "Unlimited bla bla bla\n\n";
+        $textkirim .= "<b>Biaya untuk 1 bulan</b>: $cost_vip Koin\n";
 
+        $buttons = [];
+        if(empty($data_user['vip_until'])){
+            $buttons[] = ['✅ Beli 🎖VIP', 'vipbeli'];
+        }
         $buttons = [
             ['⬅️ Kembali', 'home'],
         ];
-        if(empty($data_user['vip_until'])){
-            $buttons[] = ['✅ Beli🎖 VIP', 'vipbeli'];
-        }
 
         f("bot_kirim_perintah")("editMessageText",[
             'chat_id'=>$chat_id,

@@ -13,16 +13,13 @@ function handle_callback_query_vipbeli($botdata){
 
         $cost_vip = f("get_config")("cost_vip",10000);
         
-        $textkirim = "<b>Fitur VIP:</b>\n";
-        $textkirim .= "Unlimited bla bla bla\n\n";
-        $textkirim .= "<b>Biaya untuk 1 bulan</b>: $cost_vip Koin\n";
+        $textkirim = "Berhasil!\n\n";
+        $textkirim = "Koin anda saat ini:".(f("get_user")($botdata["from"]["id"])['coin']-$cost_vip);
 
         $buttons = [
-            ['⬅️ Kembali', 'home'],
+            ['⬅️ Kembali', 'profil'],
+            ['🏠 Menu Utama', 'home'],
         ];
-        if(empty($data_user['vip_until'])){
-            $buttons[] = ['✅ Beli🎖 VIP', 'vipbeli'];
-        }
 
         f("bot_kirim_perintah")("editMessageText",[
             'chat_id'=>$chat_id,
