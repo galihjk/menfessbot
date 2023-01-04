@@ -25,6 +25,7 @@ function pesan_utama($datakirim, $datavar = []){
     $datakirim['parse_mode'] = "HTML";
     $datakirim['reply_markup'] = f("gen_inline_keyboard")([
         ['👤 Profil','profil'],
+        ['ℹ️ Informasi','info'],
     ]);
     return $datakirim;
 }
