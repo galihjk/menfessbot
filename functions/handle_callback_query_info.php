@@ -1,7 +1,7 @@
 <?php
 function handle_callback_query_info($botdata){
     if(!empty($botdata["data"]) 
-    and $botdata["data"] == "profil"
+    and $botdata["data"] == "info"
     and !empty($botdata["message"])
     ){
         f("bot_kirim_perintah")('answerCallbackQuery',[
