@@ -3,8 +3,8 @@ function db_q($q){
     $mysqli = f("db_connect")();
     $data = [];
     if ($result = $mysqli -> query($q)) {
-        if(method_exists($result,"fetch_row")){
-            while ($row = $result -> fetch_row()) {
+        if(method_exists($result,"fetch_array")){
+            while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
                 $data[] = $row;
             }
             $result -> free_result();            

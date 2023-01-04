@@ -18,12 +18,12 @@ function handle_message_start($botdata){
         ."❌ Porn\n"
         ."\n"
         ."👇Format:👇\n"
-        ."#menfess Atau #random\n"
-        ."\n"
+        ."(#menfess Atau #random)(enter)\n"
+        ."(enter)\n"
         ."(Pesan)\n"
         ."\n"
-        ."Contoh:\n"
-        ."<pre>#random\n\nBla bla bla...</pre>\n...";
+        ."Contoh (bisa dicopy):===============\n"
+        ."<pre>#random\n\nBla blabla...</pre>\n===============";
         f("bot_kirim_perintah")("sendMessage",[
             "chat_id"=>$chat_id,
             "text"=>$textkirim,
