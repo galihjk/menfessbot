@@ -6,8 +6,8 @@ function pesan_utama($datakirim, $datavar = []){
     $media_max = f("get_config")("media_max",0);
     $channel = f("get_config")("channel");
     $textkirim = "<b>Kuota Gratis Harian</b>\n"
-    ."Pesan: $sisa_pesan/$sisa_pesan_max\n"
-    ."Media: $sisa_media/$sisa_media_max\n"
+    ."Pesan: $sisa_pesan/$pesan_max\n"
+    ."Media: $sisa_media/$media_max\n"
     ."\n"
     ."Kirim pesan kalian disini maka akan otomatis ter post di ch $channel\n"
     ."\n"
