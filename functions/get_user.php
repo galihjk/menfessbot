@@ -8,4 +8,5 @@ function get_user($id, $refresh = false){
     }
     $data = f("db_select_one")("select * from users where id = ".f("str_dbq")($id,true));
     $global_user_got[$id] = $data;
+    return $data;
 }
