@@ -13,6 +13,9 @@ function handle_callback_query_profil($botdata){
             'chat_id'=>$chat_id,
             'message_id'=>$message_id,
             'text'=>$textkirim,
+            'reply_markup'=>f("gen_inline_keyboard")([
+                ['⬅️ Kembali', 'home']
+            ]),
         ]);
         // f("bot_kirim_perintah")('answerCallbackQuery',[
         //     'callback_query_id' => $botdata['id'],
