@@ -12,10 +12,20 @@ function handle_callback_query_admtopup($botdata){
         $chat_id = $botdata["message"]["chat"]["id"];
 
         $explode = explode("_",$botdata["data"]);
-        $topupuserid = $explode[1];
+        $usertopupid = $explode[1];
         $topupnominal = $explode[2];
-        
-        $textkirim = "Underconst![$topupuserid] [$topupnominal]";
+
+        $usertopup = f("get_user")($usertopupid);
+        $usercoin = $usertopup['coin'] ?? 0;
+        $usercoin += $topupnominal;
+
+        f("db_q")("update users set coin=$usercoin where id='$usertopupid'");
+
+        $textkirim = "<b>TOP UP BERHASIL!</b>\n";
+        $textkirim .= "ID: ".$usertopupid;
+        $textkirim .= "\nNama: ".$usertopup["first_name"] . (empty($usertopup["first_name"]) ? '' : "(@".$usertopup["username"]." )");
+        $textkirim .= "\nNominal Koin: ".number_format($topupnominal)."🪙";
+        $textkirim .= "\nTanggal: ".date("Y-m-d H:i:s");
 
         f("bot_kirim_perintah")("editMessageText",[
             'chat_id'=>$chat_id,
