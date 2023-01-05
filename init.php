@@ -1,4 +1,5 @@
 <?php 
+date_default_timezone_set('Asia/Jakarta');
 function f($f){
     $filename = "functions/$f.php";
     if(file_exists($filename)){

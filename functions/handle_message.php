@@ -7,6 +7,7 @@ function handle_message($botdata){
             f("handle_botdata_functions")($botdata,[
                 "handle_message_start",
                 "handle_message_send_text",
+                "handle_message_admin",
                 "handle_message_fail",
             ]);
         }

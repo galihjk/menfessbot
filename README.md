@@ -9,6 +9,10 @@ return [
     'groupdisc'=>'-xxxxxxxxxx',
     'botuname'=>{bot user name tanpa @},
     'webhook'=>'/url_path_to/webhook_a3c59a7ed8d365cf269ef5cc4aca0c17.php',
+    'bot_admins'=>[
+        '???',
+        '???'
+    ],
     
     'db_database'=>'???',
     'db_user'=>'???',

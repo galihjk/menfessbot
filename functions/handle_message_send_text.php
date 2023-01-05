@@ -20,6 +20,14 @@ function handle_message_send_text($botdata){
                         ['🏠 Menu Utama', 'home'],
                     ]),
                 ]);
+                $botuname = f("get_config")("botuname","");
+                $sender_encrypt = f("str_encrypt")("$chat_id",true);
+                $textkirim = str_replace($prefix,"<a href='https://t.me/$botuname?start=$sender_encrypt>".$prefix."</a>",$textkirim);
+                f("bot_kirim_perintah")("sendMessage",[
+                    'chat_id'=>$chat_id,
+                    'text'=>$textkirim,
+                    "parse_mode"=>"HTML",
+                ]);
             }
             else{
                 f("bot_kirim_perintah")("sendMessage",[
