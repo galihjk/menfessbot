@@ -3,7 +3,7 @@ function handle_message_adm_topup2($botdata){
     if(!empty($botdata['reply_to_message']['text'])
     and in_array($botdata["from"]["id"], f("get_config")("bot_admins",[]))
     and f("str_contains")($botdata['reply_to_message']['text'], "Proses TOP UP (2/3)")
-    and is_numeric($text)){
+    and !empty($botdata["text"]) and is_numeric($botdata["text"])){
         $text = $botdata["text"] ?? "";
         $chat = $botdata["chat"];
         $chat_id = $chat["id"];

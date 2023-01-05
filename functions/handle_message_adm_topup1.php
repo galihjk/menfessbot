@@ -11,7 +11,7 @@ function handle_message_adm_topup1($botdata){
 
         if(empty($usertopup["first_name"])){
             $textkirim = "<b>Proses TOP UP (1/3)</b>\n";
-            $textkirim .= "Pengguna dengan ID [$text] tidak ditemukan, silakan coba lagi.";
+            $textkirim .= "❌ GAGAL\nPengguna dengan ID [$text] tidak ditemukan, silakan coba lagi.";
             f("bot_kirim_perintah")("sendMessage",[
                 'chat_id'=>$chat_id,
                 'text'=>$textkirim,
