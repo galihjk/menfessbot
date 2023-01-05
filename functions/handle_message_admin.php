@@ -9,8 +9,8 @@ function handle_message_admin($botdata){
         $textkirim = "<b>Menu Admin</b>\n";
         $textkirim .= "/topup - top up koin\n";
         $textkirim .= "/user_find {keyword} - cari user\n";
-        $textkirim .= "/ban {keyword} - ban user\n";
-        $textkirim .= "/unban {keyword} - ban user\n";
+        $textkirim .= "/ban_{id} - ban user\n";
+        $textkirim .= "/unban_{id} - ban user\n";
         $textkirim .= "/u_{id} - dapatkan info detail user\n";
         $textkirim .= "Untuk mengetahui pengirim pesan di channel, forward postingan tersebut ke bot ini.";
 

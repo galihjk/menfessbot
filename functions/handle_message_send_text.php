@@ -17,8 +17,8 @@ function handle_message_send_text($botdata){
             }
             $free_msg_used = $data_user['free_msg_used'] ?? 0;
 
-            if($free_msg_used < 0){
-                $free_msg_used--;
+            if($free_msg_used < $pesan_max){
+                $free_msg_used++;
                 f("db_q")("update users set free_msg_used = $free_msg_used where id = '$chat_id'");
                 $channelpost = f("post_text_to_channel")($chat_id,$text);
                 $sent_message_id = $channelpost['result']['message_id'];
