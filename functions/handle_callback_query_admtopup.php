@@ -1,5 +1,5 @@
 <?php
-function handle_callback_query_topup($botdata){
+function handle_callback_query_admtopup($botdata){
     if(!empty($botdata["data"]) 
     and f("str_is_diawali")($botdata["data"], "topup_")
     and !empty($botdata["message"])
