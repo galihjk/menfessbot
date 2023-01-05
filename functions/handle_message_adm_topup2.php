@@ -12,7 +12,7 @@ function handle_message_adm_topup2($botdata){
         $usertopupid = explode("]", $explode)[0];
         $usertopup = f("get_user")($usertopupid);
         
-        $textkirim = "<b>Proses TOP UP (3/3)</b>\n\nVerifikasi\n";
+        $textkirim = "<b>Proses TOP UP (3/3)</b>\nVerifikasi\n";
         $textkirim .= "ID: ".$usertopupid;
         $textkirim .= "\nNama: ".$usertopup["first_name"] . (empty($usertopup["first_name"]) ? '' : "(@".$usertopup["username"]." )");
         $textkirim .= "\nNominal Koin: ".number_format($text)."🪙";

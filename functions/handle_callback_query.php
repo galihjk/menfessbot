@@ -11,6 +11,4 @@ function handle_callback_query($botdata){
     ])){
         file_put_contents("log/unhandledcallback_query_".date("Y-m-d-H-i").".txt", file_get_contents("php://input"));
     };
-    
-
 }
