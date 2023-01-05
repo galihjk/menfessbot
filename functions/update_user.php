@@ -6,11 +6,12 @@ function update_user($userdata){
     $last_name = $userdata["last_name"] ?? "''";
     $username = $userdata["username"] ?? "''";
     $max_free_msg = f("get_config")("pesan_max",15);
+    $bot_active = f("str_dbtime")();
     $q = "INSERT INTO users 
         (id, first_name, last_name, username, free_msg_used, bot_active) VALUES 
-        ($id, $first_name, $last_name, $username, $max_free_msg, 1)
+        ($id, $first_name, $last_name, $username, $max_free_msg, $bot_active)
         ON DUPLICATE KEY UPDATE 
-        first_name=$first_name, last_name=$last_name, username=$username, bot_active=1;
+        first_name=$first_name, last_name=$last_name, username=$username, bot_active=$bot_active;
     ";
     f("db_q")($q);
 }

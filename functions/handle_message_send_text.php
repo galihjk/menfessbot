@@ -8,13 +8,36 @@ function handle_message_send_text($botdata){
             $chat_id = $chat["id"];
             $data_user = f("get_user")($botdata["from"]["id"]);
 
-            if(!empty($data_user['vip_until'])){
+            $pesan_minchar = f("get_config")("pesan_minchar",0);
+            $msgcharcount = strlen(str_replace($prefix, "", $text));
+
+            if($msgcharcount < $pesan_minchar){
+                $textkirim = "Jumlah karakter pesan anda tidak boleh kurang dari $pesan_minchar";
+                f("bot_kirim_perintah")("sendMessage",[
+                    'chat_id'=>$chat_id,
+                    'text'=>$textkirim,
+                    "parse_mode"=>"HTML",
+                ]);
+                return true;
+            }
+            if(empty($data_user['vip_until'])){
+                $pesan_maxchar = f("get_config")("pesan_maxchar",0);
+                if($msgcharcount > $pesan_maxchar){
+                    $textkirim = "Jumlah karakter pesan anda tidak boleh lebih dari $pesan_maxchar";
+                    f("bot_kirim_perintah")("sendMessage",[
+                        'chat_id'=>$chat_id,
+                        'text'=>$textkirim,
+                        "parse_mode"=>"HTML",
+                    ]);
+                    return true;
+                }
+                $pesan_max = f("get_config")("pesan_max",0);
+            }
+            else{
                 //vip
                 $pesan_max = f("get_config")("pesan_max_vip",0);
             }
-            else{
-                $pesan_max = f("get_config")("pesan_max",0);
-            }
+
             $free_msg_used = $data_user['free_msg_used'] ?? 0;
 
             if($free_msg_used < $pesan_max){
