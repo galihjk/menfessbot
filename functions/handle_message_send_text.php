@@ -22,7 +22,8 @@ function handle_message_send_text($botdata){
                 ]);
                 $botuname = f("get_config")("botuname","");
                 $sender_encrypt = f("str_encrypt")("$chat_id",true);
-                $textkirim = str_replace($prefix,"<a href='https://t.me/$botuname?start=$sender_encrypt'>".$prefix."</a>",$text);
+                // $textkirim = str_replace($prefix,"<a href='https://t.me/$botuname?start=$sender_encrypt'>".$prefix."</a>",$text);
+                $textkirim = $text."<a href='https://t.me/$botuname?start=$sender_encrypt'> 󠀠 </a>";
                 f("bot_kirim_perintah")("sendMessage",[
                     'chat_id'=>$chat_id,
                     'text'=>$textkirim,
