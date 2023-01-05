@@ -1,6 +1,6 @@
 <?php
 function handle_message_adm_fwdinfo($botdata){
-    if(!empty($botdata["forward_from"])
+    if(!empty($botdata["forward_date"])
     and in_array($botdata["from"]["id"], f("get_config")("bot_admins",[]))){
         
         $chat = $botdata["chat"];

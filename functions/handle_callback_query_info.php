@@ -15,7 +15,7 @@ function handle_callback_query_info($botdata){
         $media_cost = f("get_config")("media_cost",0);
 
         $pesan_minchar = f("get_config")("pesan_minchar",0);
-        $pesan_maxchar = f("get_config")("pesan_minchar",0);
+        $pesan_maxchar = f("get_config")("pesan_maxchar",0);
 
         $cost_vip = f("get_config")("cost_vip",0);
 
