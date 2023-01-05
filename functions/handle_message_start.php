@@ -1,7 +1,7 @@
 <?php
 function handle_message_start($botdata){
     $text = $botdata["text"] ?? "";
-    if($text == "/start"){
+    if(f("str_is_diawali")($text,"/start")){
         
         $chat = $botdata["chat"];
         $chat_id = $chat["id"];
