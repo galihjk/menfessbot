@@ -10,8 +10,12 @@ function handle_callback_query_topup($botdata){
 
         $message_id = $botdata["message"]["message_id"];
         $chat_id = $botdata["message"]["chat"]["id"];
+
+        $explode = explode("_",$botdata["data"]);
+        $topupuserid = $explode[1];
+        $topupnominal = $explode[2];
         
-        $textkirim = "Underconst!";
+        $textkirim = "Underconst![$topupuserid] [$topupnominal]";
 
         f("bot_kirim_perintah")("editMessageText",[
             'chat_id'=>$chat_id,
