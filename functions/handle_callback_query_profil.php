@@ -17,7 +17,7 @@ function handle_callback_query_profil($botdata){
         $textkirim .= "Koin: ".($data_user['coin']??'0')."🪙\n\n";
         $textkirim .= "<b>Kuota Gratis Harian dan Biaya</b>\n";
 
-        $sisa_pesan = $data_user['free_msg'] ?? 0;
+        $sisa_pesan = $data_user['free_msg_used'] ?? 0;
         $pesan_max = f("get_config")("pesan_max",15);
         $sisa_media = $data_user['free_media'] ?? 0;
         $media_max = f("get_config")("media_max",0);

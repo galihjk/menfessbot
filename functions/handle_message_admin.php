@@ -11,9 +11,8 @@ function handle_message_admin($botdata){
         $textkirim .= "/user_find {keyword} - cari user\n";
         $textkirim .= "/ban {keyword} - ban user\n";
         $textkirim .= "/unban {keyword} - ban user\n";
-        $textkirim .= "/get_sender - dapatkan pengirim pesan\n";
         $textkirim .= "/u_{id} - dapatkan info detail user\n";
-        $textkirim .= "\n".date("Y-m-d H:i:s");
+        $textkirim .= "Untuk mengetahui pengirim pesan di channel, forward postingan tersebut ke bot ini.";
 
         f("bot_kirim_perintah")("sendMessage",[
             'chat_id'=>$chat_id,

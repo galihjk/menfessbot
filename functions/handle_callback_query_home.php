@@ -10,11 +10,11 @@ function handle_callback_query_home($botdata){
         $chat_id = $botdata["message"]["chat"]["id"];
         $message_id = $botdata["message"]["message_id"];
         $data_user = f("get_user")($botdata["from"]["id"]);
-        $free_msg = $data_user['free_msg'] ?? 0;
+        $free_msg_used = $data_user['free_msg_used'] ?? 0;
         $free_media = $data_user['free_media'] ?? 0;
         $datakirim = f("pesan_utama")(
             ["chat_id"=>$chat_id, 'message_id'=>$message_id],
-            ['sisa_pesan'=>$free_msg,'sisa_media'=>$free_media]
+            ['sisa_pesan'=>$free_msg_used,'sisa_media'=>$free_media]
         );
         f("bot_kirim_perintah")("editMessageText",$datakirim);
         return true;
