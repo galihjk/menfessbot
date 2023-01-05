@@ -57,7 +57,12 @@ function handle_message_send_text($botdata){
                 $biaya = $pesan_max = f("get_config")("pesan_cost",0);
                 $coin = $data_user['coin'] ?? 0;
                 if($coin >= $biaya){
-                    $textkirim = "under: $coin >= $biaya";
+                    $coin -= $biaya;
+                    f("db_q")("update users set coin=$coin where id='".$data_user['id']."'");
+                    $channelpost = f("post_text_to_channel")($chat_id,$text);
+                    $sent_message_id = $channelpost['result']['message_id'];
+                    $channelurl = f("channel_url")("/$sent_message_id");
+                    $textkirim = "<a href='$channelurl'>Berhasil!</a>\nBiaya: $biaya 🪙\nSisa:$coin 🪙";
                     f("bot_kirim_perintah")("sendMessage",[
                         'chat_id'=>$chat_id,
                         'text'=>$textkirim,

@@ -14,13 +14,22 @@ function handle_callback_query_profil($botdata){
         $textkirim = "<b>Detail Akun</b>\n";
         $textkirim .= "ID Anda: <pre>".$data_user['id']."</pre>\n\n";
         $textkirim .= "Anggota VIP:\n".(empty($data_user['vip_until']) ? '❌ Tidak': '🎖VIP Sampai '.$data_user['vip_until'])."\n\n";
-        $textkirim .= "Koin: ".($data_user['coin']??'0')."🪙\n\n";
+        $textkirim .= "Koin: ".number_format($data_user['coin']??'0')."🪙\n\n";
         $textkirim .= "<b>Kuota Gratis Harian dan Biaya</b>\n";
 
-        $sisa_pesan = $data_user['free_msg_used'] ?? 0;
-        $pesan_max = f("get_config")("pesan_max",15);
-        $sisa_media = $data_user['free_media'] ?? 0;
-        $media_max = f("get_config")("media_max",0);
+        $free_msg_used = $data_user['free_msg_used'] ?? 0;
+        $free_media_used = $data_user['free_media_used'] ?? 0;
+        if(empty($data_user['vip_until'])){
+            $pesan_max = f("get_config")("pesan_max",0);
+            $media_max = f("get_config")("media_max",0);
+        }
+        else{
+            $pesan_max = f("get_config")("pesan_max_vip",0);
+            $media_max = f("get_config")("media_max_vip",0);
+        }
+        $sisa_pesan = $pesan_max - $free_msg_used;
+        $sisa_media = $media_max - $free_media_used;
+
         $pesan_cost = f("get_config")("pesan_cost",20);
         $media_cost = f("get_config")("media_cost",100);
 

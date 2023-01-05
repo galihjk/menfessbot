@@ -8,5 +8,6 @@ function handle_message_fail($botdata){
         "text"=>$textkirim,
         "parse_mode"=>"HTML",
     ]);
+    file_put_contents("log/last_message_fail.txt",print_r($botdata,true));
     return true;
 }
