@@ -40,18 +40,14 @@ function handle_message_send_text($botdata){
 
             $free_msg_used = $data_user['free_msg_used'] ?? 0;
 
+            $success_text = "";
+            $sent_message_id = "";
             if($free_msg_used < $pesan_max){
                 $free_msg_used++;
                 f("db_q")("update users set free_msg_used = $free_msg_used where id = '$chat_id'");
                 $channelpost = f("post_text_to_channel")($chat_id,$text);
                 $sent_message_id = $channelpost['result']['message_id'];
-                $channelurl = f("channel_url")("/$sent_message_id");
-                $textkirim = "<a href='$channelurl'>Berhasil!</a>";
-                f("bot_kirim_perintah")("sendMessage",[
-                    'chat_id'=>$chat_id,
-                    'text'=>$textkirim,
-                    "parse_mode"=>"HTML",
-                ]);
+                $success_text = "<b>Berhasil!</b>\nSisa kuota gratis: ".($pesan_max-$free_msg_used);
             }
             else{
                 $biaya = $pesan_max = f("get_config")("pesan_cost",0);
@@ -61,13 +57,7 @@ function handle_message_send_text($botdata){
                     f("db_q")("update users set coin=$coin where id='".$data_user['id']."'");
                     $channelpost = f("post_text_to_channel")($chat_id,$text);
                     $sent_message_id = $channelpost['result']['message_id'];
-                    $channelurl = f("channel_url")("/$sent_message_id");
-                    $textkirim = "<a href='$channelurl'>Berhasil!</a>\nBiaya: $biaya 🪙\nSisa:$coin 🪙";
-                    f("bot_kirim_perintah")("sendMessage",[
-                        'chat_id'=>$chat_id,
-                        'text'=>$textkirim,
-                        "parse_mode"=>"HTML",
-                    ]);
+                    $success_text = "<b>Berhasil!</b>\nBiaya: $biaya 🪙\nSisa: $coin 🪙";
                 }
                 else{
                     f("bot_kirim_perintah")("sendMessage",[
@@ -77,6 +67,19 @@ function handle_message_send_text($botdata){
                         "reply_to_message_id"=>$botdata["message"]["message_id"],
                     ]);
                 }
+            }
+            if(!empty($success_text) and !empty($sent_message_id)){
+                $channelurl = f("channel_url")("/$sent_message_id");
+                f("bot_kirim_perintah")("sendMessage",[
+                    'chat_id'=>$chat_id,
+                    'text'=>$success_text,
+                    "parse_mode"=>"HTML",
+                    'reply_markup'=>f("gen_inline_keyboard")([
+                        ['🔗 Lihat Pesan', $channelurl,2],
+                        ["📌 PIN Pesan", 'pin_'.$sent_message_id,1],
+                        ["🪙 Biaya 📌PIN ", 'pin_harga',1],
+                    ]),
+                ]);
             }
             return true;
         }
