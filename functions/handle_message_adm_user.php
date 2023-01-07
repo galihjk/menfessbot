@@ -18,7 +18,7 @@ function handle_message_adm_user($botdata){
     
         if(f("str_is_diawali")($text,"/user_find ")){
             $find = f("str_dbq")("%".str_replace("/user_find ","",$text)."%");
-            $q = "select id, first_name from user where 
+            $q = "select id, first_name from users where 
             first_name like $find or last_name like $find or username like $find 
             order by first_name
             limit 100";
