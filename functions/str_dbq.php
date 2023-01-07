@@ -1,5 +1,5 @@
 <?php
-function str_dbq($str, $wrap){
+function str_dbq($str, $wrap = true){
     if(is_array($str)){
         foreach($str as $k=>$v){
             if(is_string($v)){
