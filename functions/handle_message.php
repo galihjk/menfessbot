@@ -10,8 +10,7 @@ function handle_message($botdata){
                 "handle_message_send_text",
                 "handle_message_admin",
                 "handle_message_adm_topup",
-                "handle_message_adm_topup1",
-                "handle_message_adm_topup2",
+                "handle_message_adm_user",
                 "handle_message_fail",
             ]);
         }

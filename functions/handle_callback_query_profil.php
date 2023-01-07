@@ -13,7 +13,7 @@ function handle_callback_query_profil($botdata){
         
         $textkirim = "<b>Detail Akun</b>\n";
         $textkirim .= "ID Anda: <pre>".$data_user['id']."</pre>\n\n";
-        $textkirim .= "Pengguna 🎖PREMIUM:\n".(empty($data_user['vip_until']) ? '❌ Tidak': '✅YA (Sampai '.$data_user['vip_until']).")\n\n";
+        $textkirim .= "🎖PREMIUM:\n".(empty($data_user['vip_until']) ? '❌ Tidak': '✅YA (Sampai '.$data_user['vip_until'].')')."\n\n";
         $textkirim .= "Koin: ".number_format($data_user['coin']??'0')."🪙\n\n";
         $textkirim .= "<b>Kuota Gratis Harian dan Biaya</b>\n";
 
@@ -43,7 +43,7 @@ function handle_callback_query_profil($botdata){
             'text'=>$textkirim,
             "parse_mode"=>"HTML",
             'reply_markup'=>f("gen_inline_keyboard")([
-                ['🎖 Pengguna 🎖PREMIUM', 'vip'],
+                ['🎖 Pengguna PREMIUM', 'vip'],
                 ['💰 Top Up', 'topup'],
                 ['⬅️ Kembali', 'home'],
             ]),
