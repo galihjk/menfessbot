@@ -25,15 +25,15 @@ function handle_callback_query_info($botdata){
         $chat_id = $botdata["message"]["chat"]["id"];
         $textkirim .= "";
         $textkirim .= "<b>Kuota Gratis Harian</b>\n";
-        $textkirim .= "Pesan: $pesan_max ($pesan_max_vip untuk 🎖VIP)\n";
-        $textkirim .= "Media: $media_max ($media_max_vip untuk 🎖VIP)\n";
+        $textkirim .= "Pesan: $pesan_max ($pesan_max_vip untuk 🎖PREMIUM)\n";
+        $textkirim .= "Media: $media_max ($media_max_vip untuk 🎖PREMIUM)\n";
         $textkirim .= "Jika batas kuota harian habis maka akan membutuhkan biaya 🪙Koin tiap pengiriman.\n\n";
         $textkirim .= "<b>Biaya</b>\n";
         $textkirim .= "Pesan: $pesan_cost 🪙Koin\n";
         $textkirim .= "Media: $media_cost 🪙Koin\n\n";
         $textkirim .= "Minimal Karakter: $pesan_minchar\n";
-        $textkirim .= "Maksimal Karakter: $pesan_maxchar (unlimited untuk 🎖VIP)\n\n";
-        $textkirim .= "Biaya 🎖VIP 1 bulan: $cost_vip\n\n";
+        $textkirim .= "Maksimal Karakter: $pesan_maxchar (unlimited untuk 🎖PREMIUM)\n\n";
+        $textkirim .= "Biaya 🎖PREMIUM 1 bulan: $cost_vip\n\n";
         $textkirim .= "Format awalan pengiriman pesan:\n======\n";
         foreach ($resend_prefixes as $prefix){
             $textkirim .= "<pre>$prefix</pre>\n======\n";

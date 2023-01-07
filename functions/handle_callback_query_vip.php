@@ -12,14 +12,20 @@ function handle_callback_query_vip($botdata){
         $data_user = f("get_user")($botdata["from"]["id"]);
 
         $cost_vip = f("get_config")("cost_vip",10000);
+        $pesan_max_vip = f("get_config")("pesan_max_vip",0);
+        $media_max_vip = f("get_config")("media_max_vip",0);
         
-        $textkirim = "<b>Fitur VIP:</b>\n";
-        $textkirim .= "Unlimited bla bla bla\n\n";
-        $textkirim .= "<b>Biaya untuk 1 bulan</b>: $cost_vip Koin\n";
+        $textkirim = "<b>Fitur 🎖PREMIUM:</b>\n\n";
+        $textkirim .= "<b>Kuota Gratis Harian</b>\n";
+        $textkirim .= "Pesan: <s>$pesan_max</s> ➡️$pesan_max_vip ✅\n";
+        $textkirim .= "Media: <s>$media_max</s> ➡️$media_max_vip  ✅\n\n";
+        $textkirim .= "Maksimal karakter pesan: <b>Unlimited</b> ✅\n\n";
+        $textkirim .= "<b>Biaya untuk 1 bulan</b>: $cost_vip 🪙Koin\n";
 
         $buttons = [];
         if(empty($data_user['vip_until'])){
-            $buttons[] = ['✅ Beli 🎖VIP', 'vipbeli'];
+            $textkirim .= "✅ ANDA ADALAH PENGGUNA 🎖PREMIUM HINGGA: ".$data_user['vip_until'];
+            $buttons[] = ['✅ Beli 🎖PREMIUM', 'vipbeli'];
         }
         $buttons[] = ['⬅️ Kembali', 'profil'];
         $buttons[] = ['🏠 Menu Utama', 'home'];
