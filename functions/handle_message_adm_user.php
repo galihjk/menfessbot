@@ -23,7 +23,7 @@ function handle_message_adm_user($botdata){
             order by first_name
             limit 100";
             $dbdata = f("db_q")($q);
-            $textkirim = "$q\nUsers:\n";
+            $textkirim = "Users:\n";
             foreach($dbdata as $item){
                 $firstnameshort = explode(" ",$item["first_name"])[0];
                 $textkirim .= "/u_".$item["id"]." $firstnameshort\n";
@@ -37,7 +37,7 @@ function handle_message_adm_user($botdata){
         }
 
         if(f("str_is_diawali")($text,"/u_")){
-            $userid = str_replace("/u_ ","",$text);
+            $userid = str_replace("/u_","",$text);
             $userdata = f("get_user")($userid);
             if($userdata){
                 $textkirim = "User Data:\n[<pre>$userid</pre>]\n";
