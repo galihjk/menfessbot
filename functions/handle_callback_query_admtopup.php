@@ -24,13 +24,19 @@ function handle_callback_query_admtopup($botdata){
         $textkirim = "<b>TOP UP BERHASIL!</b>\n";
         $textkirim .= "ID: ".$usertopupid;
         $textkirim .= "\nNama: ".$usertopup["first_name"] . (empty($usertopup["first_name"]) ? '' : "(@".$usertopup["username"]." )");
-        $textkirim .= "\nNominal Koin: ".number_format($topupnominal)."🪙";
+        $textkirim .= "\nNominal Koin: ".number_format($topupnominal)." 🪙";
         $textkirim .= "\nTanggal: ".date("Y-m-d H:i:s");
 
         f("bot_kirim_perintah")("editMessageText",[
             'chat_id'=>$chat_id,
             'message_id'=>$message_id,
             'text'=>$textkirim,
+            "parse_mode"=>"HTML",
+        ]);
+        
+        f("bot_kirim_perintah")("sendMessage",[
+            'chat_id'=>$usertopupid,
+            'text'=>$textkirim."\nSaldo: $usercoin 🪙",
             "parse_mode"=>"HTML",
         ]);
         return true;

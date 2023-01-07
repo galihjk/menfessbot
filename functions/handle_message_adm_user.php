@@ -18,11 +18,12 @@ function handle_message_adm_user($botdata){
     
         if(f("str_is_diawali")($text,"/user_find ")){
             $find = f("str_dbq")("%".str_replace("/user_find ","",$text)."%");
-            $dbdata = f("db_q")("select id, first_name from user where 
+            $q = "select id, first_name from user where 
             first_name like $find or last_name like $find or username like $find 
             order by first_name
-            limit 100");
-            $textkirim = "Users:\n";
+            limit 100";
+            $dbdata = f("db_q")($q);
+            $textkirim = "$q\nUsers:\n";
             foreach($dbdata as $item){
                 $firstnameshort = explode(" ",$item["first_name"])[0];
                 $textkirim .= "/u_".$item["id"]." $firstnameshort\n";
@@ -36,7 +37,7 @@ function handle_message_adm_user($botdata){
         }
 
         if(f("str_is_diawali")($text,"/u_")){
-            $userid = f("str_dbq")(str_replace("/u_ ","",$text));
+            $userid = str_replace("/u_ ","",$text);
             $userdata = f("get_user")($userid);
             if($userdata){
                 $textkirim = "User Data:\n[<pre>$userid</pre>]\n";
