@@ -12,7 +12,9 @@ function handle_callback_query_vip($botdata){
         $data_user = f("get_user")($botdata["from"]["id"]);
 
         $cost_vip = f("get_config")("cost_vip",10000);
+        $pesan_max = f("get_config")("pesan_max",0);
         $pesan_max_vip = f("get_config")("pesan_max_vip",0);
+        $media_max = f("get_config")("media_max",0);
         $media_max_vip = f("get_config")("media_max_vip",0);
         
         $textkirim = "<b>Fitur 🎖PREMIUM:</b>\n\n";
@@ -24,8 +26,10 @@ function handle_callback_query_vip($botdata){
 
         $buttons = [];
         if(empty($data_user['vip_until'])){
-            $textkirim .= "✅ ANDA ADALAH PENGGUNA 🎖PREMIUM HINGGA: ".$data_user['vip_until'];
             $buttons[] = ['✅ Beli 🎖PREMIUM', 'vipbeli'];
+        }
+        else{
+            $textkirim .= "✅ ANDA ADALAH PENGGUNA 🎖PREMIUM HINGGA: ".$data_user['vip_until'];
         }
         $buttons[] = ['⬅️ Kembali', 'profil'];
         $buttons[] = ['🏠 Menu Utama', 'home'];

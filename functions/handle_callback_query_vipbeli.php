@@ -12,7 +12,7 @@ function handle_callback_query_vipbeli($botdata){
         $coin = $data_user['coin'] ?? 0;
         if($coin >= $cost_vip){
             $coin -= $cost_vip;
-            $vip_until = str_dbtime(' + 1 month');
+            $vip_until = f("str_dbtime")(' + 1 month');
             f("db_q")("update users set coin=$coin, vip_until=$vip_until where id='".$data_user['id']."'");
             f("bot_kirim_perintah")('answerCallbackQuery',[
                 'callback_query_id' => $botdata['id'],
