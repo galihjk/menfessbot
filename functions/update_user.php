@@ -6,7 +6,7 @@ function update_user($userdata){
     $last_name = $userdataq["last_name"] ?? "''";
     $username = $userdataq["username"] ?? "''";
     $bot_active = f("str_dbtime")();
-    $user_exist = f("get_user")($id);
+    $user_exist = f("get_user")($userdata['id']);
     if(empty($user_exist)){
         f("db_q")("INSERT INTO users 
         (id, first_name, last_name, username, bot_active) VALUES 
