@@ -3,16 +3,30 @@ function handle_message($botdata){
     if(f("is_private")($botdata)){
         $chat_id = $botdata["chat"]["id"];
         if(f("cek_sudah_subscribe")($chat_id)){
-            if(!empty($botdata["from"]))f("update_user")($botdata["from"]);
-            f("handle_botdata_functions")($botdata,[
-                "handle_message_adm_fwdinfo",
-                "handle_message_start",
-                "handle_message_send_text",
-                "handle_message_admin",
-                "handle_message_adm_topup",
-                "handle_message_adm_user",
-                "handle_message_fail",
-            ]);
+            $banned = false;
+            if(!empty($botdata["from"])){
+                f("update_user")($botdata["from"]);
+                $userdata = f("get_user")($chat_id);
+                if(!empty($userdata["banned"])){
+                    f("bot_kirim_perintah")("sendMessage",[
+                        "chat_id"=>$chat_id,
+                        "text"=>"Your user account is banned. Please contact administrator.",
+                    ]);
+                    $banned = true;
+                }
+            }
+            if(!$banned){
+                f("handle_botdata_functions")($botdata,[
+                    "handle_message_adm_fwdinfo",
+                    "handle_message_start",
+                    "handle_message_send_text",
+                    "handle_message_admin",
+                    "handle_message_adm_topup",
+                    "handle_message_adm_user",
+                    "handle_message_adm_ban",
+                    "handle_message_fail",
+                ]);
+            }
         }
     }
     elseif($chat_id == $commentgroup){

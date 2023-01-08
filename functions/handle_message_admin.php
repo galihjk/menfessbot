@@ -12,8 +12,12 @@ function handle_message_admin($botdata){
         $textkirim .= "/ban - ban user\n";
         $textkirim .= "/unban - ban user\n";
         $textkirim .= "/u_{id} - dapatkan info detail user\n";
-        $textkirim .= "/broadcast - Broadcast pesan\n";
-        $textkirim .= "Untuk mengetahui pengirim pesan di channel, forward postingan tersebut ke bot ini.";
+        $textkirim .= "/broadcast - Broadcast pesan\n\n";
+        $textkirim .= "Untuk mengetahui pengirim pesan di channel, forward postingan tersebut ke bot ini.\n\n";
+        $textkirim .= "Daftar Admin Bot: \n";
+        foreach(f("get_config")("bot_admins",[]) as $admin){
+            $textkirim .= "- /u_$admin\n";
+        }
 
         f("bot_kirim_perintah")("sendMessage",[
             'chat_id'=>$chat_id,

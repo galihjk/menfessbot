@@ -40,7 +40,7 @@ function handle_message_adm_user($botdata){
             $userid = str_replace("/u_","",$text);
             $userdata = f("get_user")($userid);
             if($userdata){
-                $textkirim = "User Data:\n[<pre>$userid</pre>]\n";
+                $textkirim = "User Data:\n<pre>$userid</pre>\n";
                 $textkirim .= print_r($userdata,true);
                 f("bot_kirim_perintah")("sendMessage",[
                     'chat_id'=>$chat_id,
