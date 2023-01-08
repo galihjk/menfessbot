@@ -16,14 +16,17 @@ function update_user($userdata){
         $last_bot_active = $user_exist['bot_active'];
         $free_msg_used = $user_exist['free_msg_used'] ?? 0;
         $free_media_used = $user_exist['free_media_used'] ?? 0;
+        $need_refresh = false;
         if(date("Y-m-d") != date("Y-m-d", strtotime($last_bot_active))){
             $free_msg_used = 0;
             $free_media_used = 0;
+            $need_refresh = true;
         }
         $vip_until = $user_exist['vip_until'] ?? null;
         if($vip_until){
             if(time() > strtotime($vip_until)){
                 $vip_until = "null";
+                $need_refresh = true;
             }
             else{
                 $vip_until = "'".$user_exist['vip_until']."'";
@@ -38,6 +41,7 @@ function update_user($userdata){
         vip_until=$vip_until,
         bot_active=$bot_active
         where id=$id");
+        if($need_refresh) unset($GLOBALS['global_user_got'][$userdata['id']]);
     }
     /*
         $q = "INSERT INTO users 
