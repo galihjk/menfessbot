@@ -10,7 +10,7 @@ function handle_message_admin($botdata){
         $textkirim .= "/topup - top up koin\n";
         $textkirim .= "/user_find {keyword} - cari user\n";
         $textkirim .= "/ban - ban user\n";
-        $textkirim .= "/unban - ban user\n";
+        $textkirim .= "/unban - unban user\n";
         $textkirim .= "/u_{id} - dapatkan info detail user\n";
         $textkirim .= "/broadcast - Broadcast pesan\n\n";
         $textkirim .= "Untuk mengetahui pengirim pesan di channel, forward postingan tersebut ke bot ini.\n\n";

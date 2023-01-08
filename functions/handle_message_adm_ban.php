@@ -45,10 +45,6 @@ function handle_message_adm_ban($botdata){
                     'chat_id'=>$chat_id,
                     'text'=>"Berhasil! /u_".$userban['id'] . " telah di<i>banned</i>",
                     "parse_mode"=>"HTML",
-                    'reply_markup' => [
-                        'force_reply'=>true,
-                        'input_field_placeholder'=>'Jumlah Koin',
-                    ],
                 ]);
             }
             return true;
@@ -94,10 +90,6 @@ function handle_message_adm_ban($botdata){
                     'chat_id'=>$chat_id,
                     'text'=>"Berhasil! /u_".$userban['id'] . " telah diUNBAN",
                     "parse_mode"=>"HTML",
-                    'reply_markup' => [
-                        'force_reply'=>true,
-                        'input_field_placeholder'=>'Jumlah Koin',
-                    ],
                 ]);
             }
             return true;

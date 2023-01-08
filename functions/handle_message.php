@@ -5,14 +5,16 @@ function handle_message($botdata){
         if(f("cek_sudah_subscribe")($chat_id)){
             $banned = false;
             if(!empty($botdata["from"])){
-                f("update_user")($botdata["from"]);
                 $userdata = f("get_user")($chat_id);
                 if(!empty($userdata["banned"])){
                     f("bot_kirim_perintah")("sendMessage",[
                         "chat_id"=>$chat_id,
-                        "text"=>"Your user account is banned. Please contact administrator.",
+                        "text"=>"Your user account ($chat_id) is banned. Please contact administrator.",
                     ]);
                     $banned = true;
+                }
+                else{
+                    f("update_user")($botdata["from"]);
                 }
             }
             if(!$banned){
