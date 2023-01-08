@@ -77,7 +77,7 @@ function handle_message_send_text($botdata){
                     'reply_markup'=>f("gen_inline_keyboard")([
                         ['🔗 Lihat Pesan', $channelurl,2],
                         ["📌 PIN Pesan", 'pin_'.$sent_message_id,1],
-                        ["🪙 Biaya 📌PIN ", 'pin_harga',1],
+                        ["Cek Biaya 📌PIN ", 'pin_harga',1],
                     ]),
                 ]);
             }

@@ -22,8 +22,8 @@ function update_user($userdata){
             $free_media_used = 0;
             $need_refresh = true;
         }
-        $vip_until = $user_exist['vip_until'] ?? null;
-        if($vip_until){
+        $vip_until = $user_exist['vip_until'] ?? "null";
+        if($vip_until != "null"){
             if(time() > strtotime($vip_until)){
                 $vip_until = "null";
                 $need_refresh = true;

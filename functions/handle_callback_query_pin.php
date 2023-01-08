@@ -8,7 +8,7 @@ function handle_callback_query_pin($botdata){
         if($botdata["data"] == "pin_harga"){
             f("bot_kirim_perintah")('answerCallbackQuery',[
                 'callback_query_id' => $botdata['id'],
-                'text' => "Harga 📌PIN saat ini: $pin_cost 🪙",
+                'text' => "Biaya 📌PIN saat ini: $pin_cost 🪙",
                 'show_alert' => true,
             ]);
         }
