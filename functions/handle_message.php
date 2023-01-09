@@ -38,23 +38,21 @@ function handle_message($botdata){
         if($text){
             $reply_to_message = $botdata['reply_to_message'];
             $entities = $reply_to_message['entities'];
+            $oleh = "";
             foreach($entities as $entity){
-                if(!empty($entity['url'])
-                and f("str_is_diawali")($entity['url'], "http://t.me/curcolanonimbot?start=lapor_")
-                ){
-                    $kode = str_replace("http://t.me/curcolanonimbot?start=lapor_","",$entity['url']);
-                    $explode = explode("_",$kode);
-                    $msgid_curhat = (int)$explode[1]-999;
-                    $curhater = strrev($explode[0].$explode[2]);
-                    $url = str_replace("@","https://t.me/",$channel)."/$msgid_curhat?comment=".$botdata['message_id'];
-                    f("bot_kirim_perintah")("sendMessage",[
-                        "chat_id"=>$curhater,
-                        "text"=>"Ada <a href='$url'>komentar</a> untuk mu. \n<i>*Balas di sini untuk mengirim pesan secara anonim</i>.\n~".$botdata['message_thread_id'],
-                        "parse_mode"=>"HTML",
-                        "reply_markup"=>['force_reply' => true,],
-                    ]);
+                if($entity['type'] == "text_link"){
+                    $botuname = f("get_config")("botuname","");
+                    $oleh = f("str_decrypt")(str_replace("https://t.me/$botuname?start=","",$entity['url']),true);
+                    break;
                 }
             }
+            $komentator = $botdata['from']['first_name'] . (empty($botdata['from']['username'])?'':" (@".$botdata['from']['username'].")");
+            $url = f("channel_url")("/$reply_to_message?comment=".$botdata['message_id']);
+            f("bot_kirim_perintah")("sendMessage",[
+                "chat_id"=>$oleh,
+                "text"=>"$komentator memberikan <a href='$url'>komentar</a> untuk mu.",
+                "parse_mode"=>"HTML",
+            ]);
         }
     }
     else{
