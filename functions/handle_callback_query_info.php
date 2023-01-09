@@ -35,7 +35,7 @@ function handle_callback_query_info($botdata){
         $textkirim .= "📌PIN: $pin_cost 🪙Koin\n\n";
         $textkirim .= "Minimal Karakter: $pesan_minchar\n";
         $textkirim .= "Maksimal Karakter: $pesan_maxchar (unlimited untuk 🎖PREMIUM)\n\n";
-        $textkirim .= "Biaya 🎖PREMIUM 1 bulan: $cost_vip\n\n";
+        $textkirim .= "Biaya 🎖PREMIUM 1 bulan: $cost_vip 🪙\n\n";
         $textkirim .= "Format awalan pengiriman pesan:\n======\n";
         foreach ($resend_prefixes as $prefix){
             $textkirim .= "<pre>$prefix</pre>\n======\n";

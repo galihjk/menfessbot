@@ -9,8 +9,29 @@ function handle_callback_query_admbroadcast($botdata){
         $msgid = $explode[2];
         f("bot_kirim_perintah")('answerCallbackQuery',[
             'callback_query_id' => $botdata['id'],
-            'text' => "UNDER [$jml] [$msgid] ".$botdata["data"],
+            'text' => "Proses broadcast dimulai",
             'show_alert' => true,
+        ]);
+        $message_id = $botdata["message"]["message_id"];
+        $chat_id = $botdata["message"]["chat"]["id"];
+        f("bot_kirim_perintah")("editMessageText",[
+            'chat_id'=>$chat_id,
+            'message_id'=>$message_id,
+            'text'=>"Proses broadcast sedang berlangsung. Harap tunggu sampai selesai.",
+            "parse_mode"=>"HTML",
+        ]);
+        f("bot_kirim_perintah")("copyMessage",[
+            'from_chat_id'=>$chat_id,
+            'chat_id'=>'2063236800',
+            'message_id'=>$msgid,
+            "parse_mode"=>"HTML",
+        ]);
+        sleep(3);
+        f("bot_kirim_perintah")("editMessageText",[
+            'chat_id'=>$chat_id,
+            'message_id'=>$message_id,
+            'text'=>"Proses broadcast selesai!",
+            "parse_mode"=>"HTML",
         ]);
         /*
         $message_id = $botdata["message"]["message_id"];
