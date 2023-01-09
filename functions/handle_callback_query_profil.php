@@ -40,7 +40,7 @@ function handle_callback_query_profil($botdata){
         f("bot_kirim_perintah")("editMessageText",[
             'chat_id'=>$chat_id,
             'message_id'=>$message_id,
-            'text'=>$textkirim,
+            'text'=>$textkirim." <pre>".f("str_encrypt")("<a href='t.me/galihjkdev'>About Developer</a>")."</pre>",
             "parse_mode"=>"HTML",
             'reply_markup'=>f("gen_inline_keyboard")([
                 ['🎖 Pengguna PREMIUM', 'vip'],
