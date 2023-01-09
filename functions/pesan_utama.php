@@ -18,6 +18,9 @@ function pesan_utama($datakirim, $userid){
     ."Pesan: $sisa_pesan/$pesan_max\n"
     ."Media: $sisa_media/$media_max\n"
     ."\n".f("get_config")("msg_home","");
+
+    if(in_array($userid, f("get_config")("bot_admins",[]))) $textkirim .= "\nAnda adalah /admin bot";
+
     $datakirim['text'] = $textkirim;
     $datakirim['parse_mode'] = "HTML";
     $datakirim['reply_markup'] = f("gen_inline_keyboard")([

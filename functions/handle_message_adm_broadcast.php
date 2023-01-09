@@ -67,7 +67,8 @@ function handle_message_adm_broadcast($botdata){
                     "parse_mode"=>"HTML",
                     "reply_to_message_id"=>$pesan_sample_msgid,
                     'reply_markup'=>f("gen_inline_keyboard")([
-                        ['✅ KIRIM', "broadcast_$jml"."_$pesan_sample_msgid"]
+                        ['✅ KIRIM', "broadcast_$jml"."_$pesan_sample_msgid"],
+                        ['🏠 Batal', 'home'],
                     ]),
                 ]);
             }

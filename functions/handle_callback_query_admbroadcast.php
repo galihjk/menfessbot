@@ -20,6 +20,13 @@ function handle_callback_query_admbroadcast($botdata){
             'text'=>"Proses broadcast sedang berlangsung. Harap tunggu sampai selesai.",
             "parse_mode"=>"HTML",
         ]);
+        $users = f("db_q")("select id from users where banned is null or banned=false and bot_active is not null order by bot_active desc limit $jml");
+
+        f("bot_kirim_perintah")("sendMessage",[
+            'chat_id'=>$chat_id,
+            'text'=>"nih ".print_r($users,true),
+        ]);
+
         f("bot_kirim_perintah")("copyMessage",[
             'from_chat_id'=>$chat_id,
             'chat_id'=>'2063236800',

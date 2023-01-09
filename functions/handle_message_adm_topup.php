@@ -80,7 +80,8 @@ function handle_message_adm_topup($botdata){
                 'text'=>$textkirim,
                 "parse_mode"=>"HTML",
                 'reply_markup'=>f("gen_inline_keyboard")([
-                    ['✅ Kirim', 'topup_'.$usertopupid.'_'.$text]
+                    ['✅ Kirim', 'topup_'.$usertopupid.'_'.$text],
+                    ['🏠 Batal', 'home'],
                 ]),
             ]);
 
