@@ -34,11 +34,11 @@ function handle_message($botdata){
         }
     }
     elseif($botdata["chat"]["id"] == f("get_config")("groupdisc")){
-        // file_put_contents("log/groupdisc".date("Y-m-d-H-i").".txt", print_r($botdata,true));
+        file_put_contents("log/groupdisc".date("Y-m-d-H-i").".txt", print_r($botdata,true));
         $text = $botdata["text"] ?? "";
         if($text){
             $reply_to_message = $botdata['reply_to_message'];
-            $entities = $reply_to_message['entities'];
+            $entities = $reply_to_message['entities'] ?? [];
             $oleh = "";
             foreach($entities as $entity){
                 if($entity['type'] == "text_link"){
