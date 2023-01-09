@@ -17,6 +17,7 @@ function handle_callback_query_info($botdata){
         $pesan_minchar = f("get_config")("pesan_minchar",0);
         $pesan_maxchar = f("get_config")("pesan_maxchar",0);
 
+        $pin_cost = f("get_config")("pin_cost",0);
         $cost_vip = f("get_config")("cost_vip",0);
 
         $resend_prefixes = f("get_config")("resend_prefixes",[]);
@@ -30,7 +31,8 @@ function handle_callback_query_info($botdata){
         $textkirim .= "Jika batas kuota harian habis maka akan membutuhkan biaya 🪙Koin tiap pengiriman.\n\n";
         $textkirim .= "<b>Biaya</b>\n";
         $textkirim .= "Pesan: $pesan_cost 🪙Koin\n";
-        $textkirim .= "Media: $media_cost 🪙Koin\n\n";
+        $textkirim .= "Media: $media_cost 🪙Koin\n";
+        $textkirim .= "📌PIN: $pin_cost 🪙Koin\n\n";
         $textkirim .= "Minimal Karakter: $pesan_minchar\n";
         $textkirim .= "Maksimal Karakter: $pesan_maxchar (unlimited untuk 🎖PREMIUM)\n\n";
         $textkirim .= "Biaya 🎖PREMIUM 1 bulan: $cost_vip\n\n";
@@ -42,8 +44,9 @@ function handle_callback_query_info($botdata){
         f("bot_kirim_perintah")("editMessageText",[
             'chat_id'=>$chat_id,
             'message_id'=>$message_id,
-            'text'=>$textkirim,
+            'text'=>$textkirim."\n\n".f("str_decrypt")("imVOVhrxkT9NNRoKQZkVpwXx6wqvlJScsk5MrYEgJSKPKPoo3/lALnxmzyiY"),
             "parse_mode"=>"HTML",
+            "disable_web_page_preview"=>true,
             'reply_markup'=>f("gen_inline_keyboard")([
                 ['⬅️ Kembali', 'home']
             ]),

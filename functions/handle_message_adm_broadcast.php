@@ -22,8 +22,7 @@ function handle_message_adm_broadcast($botdata){
 
 
         if(!empty($botdata['reply_to_message']['text'])
-        and f("str_contains")($botdata['reply_to_message']['text'], "Proses BROADCAST (1/3)")
-        and is_numeric($botdata["text"])){
+        and f("str_contains")($botdata['reply_to_message']['text'], "Proses BROADCAST (1/3)")){
             $jml = $botdata["text"];
             $textkirim = "<b>Proses BROADCAST (2/3)</b>\n";
             $textkirim .= "Mau kirim pesan apa? User akan dipilih dari yang paling terkini aktivitasnya sebanyak: $jml";
@@ -33,7 +32,7 @@ function handle_message_adm_broadcast($botdata){
                 "parse_mode"=>"HTML",
                 'reply_markup' => [
                     'force_reply'=>true,
-                    'input_field_placeholder'=>'Tulis Pesan',
+                    'input_field_placeholder'=>'Pesan Broadcast',
                 ],
             ]);
             return true;
@@ -49,7 +48,7 @@ function handle_message_adm_broadcast($botdata){
                 'text'=>$text,
                 "parse_mode"=>"HTML",
             ]);
-            $pesan_sample_msgid = $pesan_sample["result"]["msgid"] ?? "";
+            $pesan_sample_msgid = $pesan_sample["result"]["message_id"] ?? "";
             if(empty($pesan_sample_msgid)){
                 f("bot_kirim_perintah")("sendMessage",[
                     'chat_id'=>$chat_id,
