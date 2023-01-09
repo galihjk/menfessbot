@@ -33,7 +33,7 @@ function handle_message($botdata){
             }
         }
     }
-    elseif($chat_id == $commentgroup){
+    elseif($chat_id == f("get_config")("groupdisc")){
         $text = $botdata["text"] ?? "";
         if($text){
             $reply_to_message = $botdata['reply_to_message'];
