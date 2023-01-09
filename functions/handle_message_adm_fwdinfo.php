@@ -23,7 +23,7 @@ function handle_message_adm_fwdinfo($botdata){
         foreach($entities as $entity){
             if($entity['type'] == "text_link"){
                 $botuname = f("get_config")("botuname","");
-                $oleh = f("str_decrypt")(str_replace("https://t.me/$botuname?start=","",$entity['url']));
+                $oleh = f("str_decrypt")(str_replace("https://t.me/$botuname?start=","",$entity['url']),true);
                 break;
             }
         }
