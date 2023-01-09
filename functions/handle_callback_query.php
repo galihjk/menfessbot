@@ -9,6 +9,7 @@ function handle_callback_query($botdata){
         "handle_callback_query_vipbeli",
         "handle_callback_query_pin",
         "handle_callback_query_admtopup",
+        "handle_callback_query_admbroadcast",
     ])){
         file_put_contents("log/unhandledcallback_query_".date("Y-m-d-H-i").".txt", file_get_contents("php://input"));
     };

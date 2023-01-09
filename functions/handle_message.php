@@ -26,6 +26,7 @@ function handle_message($botdata){
                     "handle_message_adm_topup",
                     "handle_message_adm_user",
                     "handle_message_adm_ban",
+                    "handle_message_adm_broadcast",
                     "handle_message_fail",
                 ]);
             }
