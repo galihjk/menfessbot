@@ -39,16 +39,18 @@ function handle_message($botdata){
         if($text){
             $reply_to_message = $botdata['reply_to_message'];
             $entities = $reply_to_message['entities'] ?? [];
+            $reply_to_message_id = $reply_to_message['message_id'] ?? [];
             $oleh = "";
             foreach($entities as $entity){
                 if($entity['type'] == "text_link"){
                     $botuname = f("get_config")("botuname","");
+                    file_put_contents("log/groupdiscuser".date("Y-m-d-H-i").".txt", print_r([$entity['url'],str_replace("https://t.me/$botuname?start=","",$entity['url']),f("str_decrypt")(str_replace("https://t.me/$botuname?start=","",$entity['url']),true)],true));
                     $oleh = f("str_decrypt")(str_replace("https://t.me/$botuname?start=","",$entity['url']),true);
                     break;
                 }
             }
             $komentator = $botdata['from']['first_name'] . (empty($botdata['from']['username'])?'':" (@".$botdata['from']['username'].")");
-            $url = f("channel_url")("/$reply_to_message?comment=".$botdata['message_id']);
+            $url = f("channel_url")("/$reply_to_message_id?comment=".$botdata['message_id']);
             f("bot_kirim_perintah")("sendMessage",[
                 "chat_id"=>$oleh,
                 "text"=>"$komentator memberikan <a href='$url'>komentar</a> untuk mu.",
