@@ -33,8 +33,8 @@ function handle_message($botdata){
             }
         }
     }
-    elseif($chat_id == f("get_config")("groupdisc")){
-        file_put_contents("log/groupdisc".date("Y-m-d-H-i").".txt", print_r($botdata,true));
+    elseif($botdata["chat"]["id"] == f("get_config")("groupdisc")){
+        // file_put_contents("log/groupdisc".date("Y-m-d-H-i").".txt", print_r($botdata,true));
         $text = $botdata["text"] ?? "";
         if($text){
             $reply_to_message = $botdata['reply_to_message'];
@@ -57,12 +57,14 @@ function handle_message($botdata){
         }
     }
     else{
-        file_put_contents("log/unhandleMsg".date("Y-m-d-H-i").".txt", print_r($botdata,true));
         if(!empty($chat_id)){
             f("bot_kirim_perintah")("sendMessage",[
                 "chat_id"=>$chat_id,
                 "text"=>"yuk, ke sini ==> $channel",
             ]);
+        }
+        else{
+            file_put_contents("log/unhandleMsg".date("Y-m-d-H-i").".txt", print_r($botdata,true));
         }
     }
 }
