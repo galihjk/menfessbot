@@ -21,19 +21,13 @@ function handle_callback_query_admbroadcast($botdata){
             "parse_mode"=>"HTML",
         ]);
         $users = f("db_q")("select id from users where banned is null or banned=false and bot_active is not null order by bot_active desc limit $jml");
-
-        f("bot_kirim_perintah")("sendMessage",[
-            'chat_id'=>$chat_id,
-            'text'=>"nih ".print_r($users,true),
-        ]);
-
-        f("bot_kirim_perintah")("copyMessage",[
-            'from_chat_id'=>$chat_id,
-            'chat_id'=>'2063236800',
-            'message_id'=>$msgid,
-            "parse_mode"=>"HTML",
-        ]);
-        sleep(3);
+        foreach($users as $user){
+            f("bot_kirim_perintah")("copyMessage",[
+                'from_chat_id'=>$chat_id,
+                'chat_id'=>$user['id'],
+                'message_id'=>$msgid,
+            ]);
+        }
         f("bot_kirim_perintah")("editMessageText",[
             'chat_id'=>$chat_id,
             'message_id'=>$message_id,

@@ -22,6 +22,7 @@ function handle_message($botdata){
                     "handle_message_adm_fwdinfo",
                     "handle_message_start",
                     "handle_message_send_text",
+                    "handle_message_send_media",
                     "handle_message_admin",
                     "handle_message_adm_topup",
                     "handle_message_adm_user",
