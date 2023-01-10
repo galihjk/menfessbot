@@ -45,7 +45,7 @@ function handle_message($botdata){
                 $entities = $reply_to_message['entities'] ?? [];
             }
             
-            $reply_to_message_id = $reply_to_message['message_id'] ?? [];
+            $reply_to_message_id = $reply_to_message['forward_from_message_id'] ?? [];
             $oleh = "";
             // file_put_contents("log/groupdiscuserentities".date("Y-m-d-H-i").".txt", print_r([$reply_to_message, $reply_to_message['entities'], $entities],true));
             foreach($entities as $entity){
@@ -57,7 +57,7 @@ function handle_message($botdata){
                 }
             }
             $komentator = $botdata['from']['first_name'] . (empty($botdata['from']['username'])?'':" (@".$botdata['from']['username'].")");
-            $url = f("channel_url")("/$reply_to_message_id?comment=".$botdata['forward_from_message_id']);
+            $url = f("channel_url")("/$reply_to_message_id?comment=".$botdata['message_id']);
             if($oleh){
                 f("bot_kirim_perintah")("sendMessage",[
                     "chat_id"=>$oleh,
