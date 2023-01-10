@@ -58,4 +58,5 @@ function cek_sudah_subscribe($userid){
             return false;
         }
     }
+    return true;
 }
