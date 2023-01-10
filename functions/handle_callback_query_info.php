@@ -22,6 +22,8 @@ function handle_callback_query_info($botdata){
 
         $resend_prefixes = f("get_config")("resend_prefixes",[]);
 
+        $delay = f("get_config")("delay",0);
+        
         $message_id = $botdata["message"]["message_id"];
         $chat_id = $botdata["message"]["chat"]["id"];
         $textkirim .= "";
@@ -34,7 +36,8 @@ function handle_callback_query_info($botdata){
         $textkirim .= "Media: $media_cost 🪙Koin\n";
         $textkirim .= "📌PIN: $pin_cost 🪙Koin\n\n";
         $textkirim .= "Minimal Karakter: $pesan_minchar\n";
-        $textkirim .= "Maksimal Karakter: $pesan_maxchar (unlimited untuk 🎖PREMIUM)\n\n";
+        $textkirim .= "Maksimal Karakter: $pesan_maxchar (unlimited untuk 🎖PREMIUM)\n";
+        $textkirim .= "Jeda pengiriman: $delay detik\n\n";
         $textkirim .= "Biaya 🎖PREMIUM 1 bulan: $cost_vip 🪙\n\n";
         $textkirim .= "Format awalan pengiriman pesan:\n======\n";
         foreach ($resend_prefixes as $prefix){

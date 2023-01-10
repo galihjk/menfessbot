@@ -4,6 +4,8 @@ function post_media_to_channel($from, $caption, $type, $fileid){
     $channel = f("get_config")("channel","");
     $sender_encrypt = f("str_encrypt")("$from",true);
     $caption = $caption."<a href='https://t.me/$botuname?start=$sender_encrypt'> 󠀠 </a>";
+    $last_send = f("str_dbtime")();
+    f("db_q")("update users set last_send=$last_send where id='$from'");
     return f("bot_kirim_perintah")("send$type",[
         'chat_id'=>$channel,
         'caption'=>$caption,

@@ -11,6 +11,17 @@ function handle_message_send_text($botdata){
             $pesan_minchar = f("get_config")("pesan_minchar",0);
             $msgcharcount = strlen(str_replace($prefix, "", $text));
 
+            $last_send = $data_user['last_send'] ?? null;
+            $delay = f("get_config")("delay",0);
+            if(!empty($last_send) and abs(time()-strtotime($last_send)) < $delay){
+                $textkirim = "Anda baru saja mengirim pesan, silakan tunggu ".($delay - (time()-strtotime($last_send)))." detik lagi.";
+                f("bot_kirim_perintah")("sendMessage",[
+                    'chat_id'=>$chat_id,
+                    'text'=>$textkirim,
+                    "parse_mode"=>"HTML",
+                ]);
+                return true;
+            }
             if($msgcharcount < $pesan_minchar){
                 $textkirim = "Jumlah karakter pesan anda tidak boleh kurang dari $pesan_minchar";
                 f("bot_kirim_perintah")("sendMessage",[
