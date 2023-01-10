@@ -38,9 +38,16 @@ function handle_message($botdata){
         $text = $botdata["text"] ?? "";
         if($text){
             $reply_to_message = $botdata['reply_to_message'];
-            $entities = $reply_to_message['entities'] ?? [];
+            if(!empty($reply_to_message["caption_entities"])){
+                $entities = $reply_to_message["caption_entities"];
+            }
+            else{
+                $entities = $reply_to_message['entities'] ?? [];
+            }
+            
             $reply_to_message_id = $reply_to_message['message_id'] ?? [];
             $oleh = "";
+            file_put_contents("log/groupdiscuserentities".date("Y-m-d-H-i").".txt", print_r([$reply_to_message, $reply_to_message['entities'], $entities],true));
             foreach($entities as $entity){
                 if($entity['type'] == "text_link"){
                     $botuname = f("get_config")("botuname","");
@@ -51,11 +58,13 @@ function handle_message($botdata){
             }
             $komentator = $botdata['from']['first_name'] . (empty($botdata['from']['username'])?'':" (@".$botdata['from']['username'].")");
             $url = f("channel_url")("/$reply_to_message_id?comment=".$botdata['message_id']);
-            f("bot_kirim_perintah")("sendMessage",[
-                "chat_id"=>$oleh,
-                "text"=>"$komentator memberikan <a href='$url'>komentar</a> untuk mu.",
-                "parse_mode"=>"HTML",
-            ]);
+            if($oleh){
+                f("bot_kirim_perintah")("sendMessage",[
+                    "chat_id"=>$oleh,
+                    "text"=>"$komentator memberikan <a href='$url'>komentar</a> untuk mu.",
+                    "parse_mode"=>"HTML",
+                ]);
+            }
         }
     }
     else{
