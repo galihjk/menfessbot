@@ -56,7 +56,12 @@ function handle_message($botdata){
                     break;
                 }
             }
-            $komentator = $botdata['from']['first_name'] . (empty($botdata['from']['username'])?'':" (@".$botdata['from']['username'].")");
+            if(!empty($botdata['from']['username']) and strtolower($botdata['from']['username']) == strtolower('GroupAnonymousBot')){
+                $komentator = "@" . f("get_config")("channel");
+            }
+            else{
+                $komentator = $botdata['from']['first_name'] . (empty($botdata['from']['username'])?'':" (@".$botdata['from']['username'].")");
+            }
             $url = f("channel_url")("/$reply_to_message_id?comment=".$botdata['message_id']);
             if($oleh){
                 f("bot_kirim_perintah")("sendMessage",[
@@ -71,7 +76,10 @@ function handle_message($botdata){
         if(!empty($chat_id)){
             f("bot_kirim_perintah")("sendMessage",[
                 "chat_id"=>$chat_id,
-                "text"=>"yuk, ke sini ==> $channel",
+                "text"=>"yuk, ke sini ==> ".f("get_config")("channel"),
+            ]);
+            f("bot_kirim_perintah")("leaveChat",[
+                "chat_id"=>$chat_id,
             ]);
         }
         else{
