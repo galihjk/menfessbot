@@ -57,7 +57,7 @@ function handle_message($botdata){
                 }
             }
             if(!empty($botdata['from']['username']) and strtolower($botdata['from']['username']) == strtolower('GroupAnonymousBot')){
-                $komentator = "@" . f("get_config")("channel");
+                $komentator = f("get_config")("channel");
             }
             else{
                 $komentator = $botdata['from']['first_name'] . (empty($botdata['from']['username'])?'':" (@".$botdata['from']['username'].")");
