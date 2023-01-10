@@ -22,7 +22,7 @@ function cek_sudah_subscribe($userid){
                 file_put_contents("Last Error empty status1.txt",print_r([$getChatMember, $userid, $user],true));
                 die("Error empty status");
             }
-            if(in_array($chatmemberchannel["result"]["status"],["restricted","left","kicked"])){
+            if(in_array($getChatMember["result"]["status"],["restricted","left","kicked"])){
                 $chatinfo = f("bot_kirim_perintah")("getChat",[
                     "chat_id"=>$forcesubid,
                 ]);
