@@ -41,6 +41,7 @@ function cek_sudah_subscribe($userid){
                 }
             }
         }
+        file_put_contents("harus join $userid.txt",print_r([$getChatMember, $userid, $user,$harusjoin],true));
         if(empty($harusjoin)){
             return true;
         }
