@@ -1,13 +1,13 @@
 <?php
 function cek_sudah_subscribe($userid){
     $channel = f("get_config")("channel");
-    $force_sub = f("get_config")("force_sub");
+    $force_subs = f("get_config")("force_subs");
     $user = f("get_user")($userid);
     if(empty($user['bot_active']) or
     (!empty($user['bot_active']) and date("YmdH") != date("YmdH",strtotime($user['bot_active'])))
     ){
         $harusjoin = [];
-        foreach($force_sub as $forcesubid){
+        foreach($force_subs as $forcesubid){
             $getChatMember = f("bot_kirim_perintah")("getChatMember",[
                 'chat_id'=>$forcesubid,
                 'user_id'=>$userid,
