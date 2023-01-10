@@ -13,6 +13,12 @@ function cek_sudah_subscribe($userid){
                 'user_id'=>$userid,
             ]);
             if(empty($getChatMember["result"]["status"])){
+                foreach(f("get_config")("bot_admins",[]) as $chatidadmin){
+                    f("bot_kirim_perintah")("sendMessage",[
+                        'chat_id'=>$chatidadmin,
+                        'text'=>"Tolong masukkan saya ke $forcesubid untuk bisa mengecek apakah $userid sudah join/subscribe atau belum.",
+                    ]);
+                };
                 file_put_contents("Last Error empty status1.txt",print_r([$getChatMember, $userid, $user],true));
                 die("Error empty status");
             }
