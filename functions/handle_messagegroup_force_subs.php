@@ -9,6 +9,7 @@ function handle_messagegroup_force_subs($botdata){
             }
         }
     }
-    file_put_contents("log/unhandle_messagegroup_force_subs".date("Y-m-d-H-i").".txt", print_r([$chat_id, $item, $botdata],true));
+    // file_put_contents("log/unhandle_messagegroup_force_subs".date("Y-m-d-H-i").".txt", print_r([$chat_id, $item, $botdata],true));
+    file_put_contents("log/unhandle_messagegroup_force_subsLAST.txt", print_r([$chat_id, $item, $botdata],true));
     return false;
 }

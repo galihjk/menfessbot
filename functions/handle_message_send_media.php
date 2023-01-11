@@ -32,7 +32,8 @@ function handle_message_send_media($botdata){
         $fileid = $botdata[$jenis][0]['file_id'];
     }
     else{
-        file_put_contents("log/jenis_not_exists".date("Y-m-d-H-i").".txt", print_r($botdata,true));
+        // file_put_contents("log/jenis_not_exists".date("Y-m-d-H-i").".txt", print_r($botdata,true));
+        file_put_contents("log/jenis_not_existsLAST.txt", print_r($botdata,true));
     }
     $prefixes = f("get_config")("resend_prefixes",[]);
     foreach($prefixes as $prefix){

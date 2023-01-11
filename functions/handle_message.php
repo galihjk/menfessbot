@@ -38,6 +38,7 @@ function handle_message($botdata){
         "handle_messagegroup_force_subs",
         "handle_messagegroup_others",
     ])){
-        file_put_contents("log/unhandleMsg".date("Y-m-d-H-i").".txt", print_r($botdata,true));
+        // file_put_contents("log/unhandleMsg".date("Y-m-d-H-i").".txt", print_r($botdata,true));
+        file_put_contents("log/unhandleMsgLAST.txt", print_r($botdata,true));
     }
 }

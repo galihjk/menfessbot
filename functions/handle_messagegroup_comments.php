@@ -39,7 +39,8 @@ function handle_messagegroup_comments($botdata){
             }
             return true;
         }
-        file_put_contents("log/unhandle_messagegroup_comments".date("Y-m-d-H-i").".txt", print_r($botdata,true));
+        // file_put_contents("log/unhandle_messagegroup_comments".date("Y-m-d-H-i").".txt", print_r($botdata,true));
+        file_put_contents("log/unhandle_messagegroup_commentsLAST.txt", print_r($botdata,true));
         return true;
     }
     return false;

@@ -1,7 +1,7 @@
 <?php
 function cek_sudah_subscribe($userid){
     $channel = f("get_config")("channel");
-    $force_subs = f("get_config")("force_subs");
+    $force_subs = f("get_config")("force_subs",[]);
     $user = f("get_user")($userid);
     if(empty($user['bot_active']) or
     (!empty($user['bot_active']) and date("YmdH") != date("YmdH",strtotime($user['bot_active'])))
@@ -19,7 +19,7 @@ function cek_sudah_subscribe($userid){
                         'text'=>"Tolong masukkan saya ke $forcesubid untuk bisa mengecek apakah $userid sudah join/subscribe atau belum.",
                     ]);
                 };
-                file_put_contents("Last Error empty status1.txt",print_r([$getChatMember, $userid, $user],true));
+                file_put_contents("log/Last Error empty status1.txt",print_r([$getChatMember, $userid, $user],true));
                 die("Error empty status");
             }
             if(in_array($getChatMember["result"]["status"],["restricted","left","kicked"])){
@@ -41,7 +41,7 @@ function cek_sudah_subscribe($userid){
                 }
             }
         }
-        file_put_contents("harus join $userid.txt",print_r([$getChatMember, $userid, $user,$harusjoin],true));
+        // file_put_contents("harus join $userid.txt",print_r([$getChatMember, $userid, $user,$harusjoin],true));
         if(empty($harusjoin)){
             return true;
         }
