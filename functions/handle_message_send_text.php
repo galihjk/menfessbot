@@ -57,8 +57,10 @@ function handle_message_send_text($botdata){
                 $free_msg_used++;
                 f("db_q")("update users set free_msg_used = $free_msg_used where id = '$chat_id'");
                 $channelpost = f("post_text_to_channel")($chat_id,$text);
-                $sent_message_id = $channelpost['result']['message_id'];
-                $success_text = "<b>Berhasil!</b>\nSisa kuota gratis: ".($pesan_max-$free_msg_used);
+                if(!empty($channelpost['result']['message_id'])){
+                    $sent_message_id = $channelpost['result']['message_id'];
+                    $success_text = "<b>Berhasil!</b>\nSisa kuota gratis: ".($pesan_max-$free_msg_used);
+                }
             }
             else{
                 $biaya = f("get_config")("pesan_cost",0);
@@ -67,8 +69,10 @@ function handle_message_send_text($botdata){
                     $coin -= $biaya;
                     f("db_q")("update users set coin=$coin where id='".$data_user['id']."'");
                     $channelpost = f("post_text_to_channel")($chat_id,$text);
-                    $sent_message_id = $channelpost['result']['message_id'];
-                    $success_text = "<b>Berhasil!</b>\nBiaya: $biaya 🪙\nSisa: $coin 🪙";
+                    if(!empty($channelpost['result']['message_id'])){
+                        $sent_message_id = $channelpost['result']['message_id'];
+                        $success_text = "<b>Berhasil!</b>\nBiaya: $biaya 🪙\nSisa: $coin 🪙";                        
+                    }
                 }
                 else{
                     f("bot_kirim_perintah")("sendMessage",[
