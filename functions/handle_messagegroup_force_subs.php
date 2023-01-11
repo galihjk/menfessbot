@@ -1,6 +1,7 @@
 <?php
 function handle_messagegroup_force_subs($botdata){
-    foreach(f("get_config")("force_subs",[]) as $item){
+    $forcesubs = f("get_config")("force_subs",[]);
+    foreach($forcesubs as $item){
         if(f("str_is_diawali")($item,"-")){
             $chat_id = $botdata["chat"]["id"];
             if($chat_id == $item){
@@ -8,5 +9,6 @@ function handle_messagegroup_force_subs($botdata){
             }
         }
     }
+    file_put_contents("log/unhandle_messagegroup_force_subs".date("Y-m-d-H-i").".txt", print_r([$chat_id, $item, $botdata],true));
     return false;
 }
