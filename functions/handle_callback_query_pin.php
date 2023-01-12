@@ -8,7 +8,7 @@ function handle_callback_query_pin($botdata){
         if($botdata["data"] == "pin_harga"){
             f("bot_kirim_perintah")('answerCallbackQuery',[
                 'callback_query_id' => $botdata['id'],
-                'text' => "Biaya 📌PIN saat ini: $pin_cost 🪙",
+                'text' => "Biaya 📌PIN saat ini: $pin_cost 🪙 untuk 24 jam",
                 'show_alert' => true,
             ]);
         }
@@ -40,7 +40,10 @@ function handle_callback_query_pin($botdata){
                 $chat_id = $botdata["message"]["chat"]["id"];
                 $message_id = $botdata["message"]["message_id"];
                 $channelurl = f("channel_url")("/$pinmsgid");
-                $textkirim = "<a href='$channelurl'>📌PINNED!</a>\nBiaya: $pin_cost 🪙\nSisa: $coin 🪙";
+                $new_job_unpin = f("jobadd_unpin")($pinmsgid)['time'];
+                $pin_until = date("Y-m-d H:i:s", $new_job_unpin);
+                
+                $textkirim = "<a href='$channelurl'>📌PINNED!</a>\nBiaya: $pin_cost 🪙\nSisa: $coin 🪙\nSampai: $pin_until";
                 f("bot_kirim_perintah")("sendMessage",[
                     'chat_id'=>$chat_id,
                     'message_id'=>$message_id,
