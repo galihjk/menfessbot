@@ -16,7 +16,7 @@ function handle_callback_query_info($botdata){
 
         $pesan_minchar = f("get_config")("pesan_minchar",0);
         $pesan_maxchar = f("get_config")("pesan_maxchar",0);
-        $pesan_maxchar_vip = f("pesan_maxchar_vip")("pesan_maxchar_vip",0);
+        $pesan_maxchar_vip = f("get_config")("pesan_maxchar_vip",0);
 
         $pin_cost = f("get_config")("pin_cost",0);
         $cost_vip = f("get_config")("cost_vip",0);
