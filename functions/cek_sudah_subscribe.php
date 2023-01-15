@@ -3,8 +3,13 @@ function cek_sudah_subscribe($userid){
     $channel = f("get_config")("channel");
     $force_subs = f("get_config")("force_subs",[]);
     $user = f("get_user")($userid);
-    if(empty($user['bot_active']) or
-    (!empty($user['bot_active']) and date("YmdH") != date("YmdH",strtotime($user['bot_active'])))
+    if(
+        // jika bukan admin
+        !in_array($userid,f("get_config")("bot_admins",[]))
+
+        // tidak dipakai:
+        // empty($user['bot_active']) or
+        // (!empty($user['bot_active']) and date("YmdH") != date("YmdH",strtotime($user['bot_active'])))
     ){
         $harusjoin = [];
         foreach($force_subs as $forcesubid){
