@@ -47,7 +47,7 @@ function handle_callback_query_info($botdata){
             $textkirim .= "<pre>$blablabla$conval$blablabla</pre>\n======\n";
         }
         foreach (f("get_config")("resend_suffixes",[]) as $suffix){
-            $textkirim .= "<pre>$blablabla$prefix</pre>\n======\n";
+            $textkirim .= "<pre>$blablabla$suffix</pre>\n======\n";
         }
         $textkirim .= "\n<i>Aturan mungkin bisa berubah sewaktu-waktu</i>";
         f("bot_kirim_perintah")("editMessageText",[
