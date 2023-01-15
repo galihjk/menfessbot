@@ -3,6 +3,7 @@ function handle_message_resend($botdata){
     if(empty($botdata["forward_date"])){
         $prefixes = f("get_config")("resend_prefixes",[]);
         $contains = f("get_config")("resend_contains",[]);
+        $suffixes = f("get_config")("resend_suffixes",[]);
         $caption = $botdata["caption"] ?? "";
         if(!empty($caption)){
             if(!empty($botdata['animation'])){
@@ -60,7 +61,14 @@ function handle_message_resend($botdata){
                     break;
                 }                
             }
-
+        }
+        if(!$mathced){
+            foreach($suffixes as $suffix){
+                if(f("str_is_diakhiri")($text,$suffix)){
+                    $mathced = $suffix;
+                    break;
+                }                
+            }
         }
         if(!empty($mathced)){
             

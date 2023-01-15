@@ -16,12 +16,14 @@ function handle_callback_query_vip($botdata){
         $pesan_max_vip = f("get_config")("pesan_max_vip",0);
         $media_max = f("get_config")("media_max",0);
         $media_max_vip = f("get_config")("media_max_vip",0);
+        $pesan_maxchar = f("get_config")("pesan_maxchar",0);
+        $pesan_maxchar_vip = f("pesan_maxchar_vip")("pesan_maxchar_vip",0);
         
         $textkirim = "<b>Fitur 🎖PREMIUM:</b>\n\n";
         $textkirim .= "<b>Kuota Gratis Harian</b>\n";
         $textkirim .= "Pesan: <s>$pesan_max</s> ➡️ <b>$pesan_max_vip</b> ✅\n";
         $textkirim .= "Media: <s>$media_max</s> ➡️ <b>$media_max_vip</b>  ✅\n\n";
-        $textkirim .= "Maksimal karakter pesan: <b>Unlimited</b> ✅\n\n";
+        $textkirim .= "Maksimal karakter pesan: <s>$pesan_maxchar</s> ➡️ <b>$pesan_maxchar_vip</b> ✅\n\n";
         $textkirim .= "<b>Biaya untuk 1 bulan</b>: $cost_vip 🪙Koin\n";
 
         $buttons = [];
@@ -29,7 +31,7 @@ function handle_callback_query_vip($botdata){
             $buttons[] = ['✅ Beli 🎖PREMIUM', 'vipbeli'];
         }
         else{
-            $textkirim .= "\n✅ ANDA ADALAH PENGGUNA 🎖PREMIUM HINGGA: ".$data_user['vip_until'];
+            $textkirim .= "\n✅ ANDA ADALAH PENGGUNA 🎖PREMIUM HINGGA: \n".$data_user['vip_until'];
         }
         $buttons[] = ['⬅️ Kembali', 'profil'];
         $buttons[] = ['🏠 Menu Utama', 'home'];

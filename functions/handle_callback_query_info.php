@@ -16,11 +16,10 @@ function handle_callback_query_info($botdata){
 
         $pesan_minchar = f("get_config")("pesan_minchar",0);
         $pesan_maxchar = f("get_config")("pesan_maxchar",0);
+        $pesan_maxchar_vip = f("pesan_maxchar_vip")("pesan_maxchar_vip",0);
 
         $pin_cost = f("get_config")("pin_cost",0);
         $cost_vip = f("get_config")("cost_vip",0);
-
-        $resend_prefixes = f("get_config")("resend_prefixes",[]);
 
         $delay = f("get_config")("delay",0);
         
@@ -36,12 +35,19 @@ function handle_callback_query_info($botdata){
         $textkirim .= "Media: $media_cost 🪙Koin\n";
         $textkirim .= "📌PIN: $pin_cost 🪙Koin\n\n";
         $textkirim .= "Minimal Karakter: $pesan_minchar\n";
-        $textkirim .= "Maksimal Karakter: $pesan_maxchar (unlimited untuk 🎖PREMIUM)\n";
+        $textkirim .= "Maksimal Karakter: $pesan_maxchar ($pesan_maxchar_vip untuk 🎖PREMIUM)\n";
         $textkirim .= "Jeda pengiriman: $delay detik\n\n";
         $textkirim .= "Biaya 🎖PREMIUM 1 bulan: $cost_vip 🪙\n\n";
-        $textkirim .= "Format awalan pengiriman pesan:\n======\n";
-        foreach ($resend_prefixes as $prefix){
-            $textkirim .= "<pre>$prefix</pre>\n======\n";
+        $textkirim .= "Format pengiriman pesan:\n======\n";
+        $blablabla = "{pesan}";
+        foreach (f("get_config")("resend_prefixes",[]) as $prefix){
+            $textkirim .= "<pre>$prefix$blablabla</pre>\n======\n";
+        }
+        foreach (f("get_config")("resend_contains",[]) as $conval){
+            $textkirim .= "<pre>$blablabla$conval$blablabla</pre>\n======\n";
+        }
+        foreach (f("get_config")("resend_suffixes",[]) as $suffix){
+            $textkirim .= "<pre>$blablabla$prefix</pre>\n======\n";
         }
         $textkirim .= "\n<i>Aturan mungkin bisa berubah sewaktu-waktu</i>";
         f("bot_kirim_perintah")("editMessageText",[
