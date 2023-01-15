@@ -1,10 +1,9 @@
 <?php
 function handle_message_send_text($botdata){
-    $free_msg_used = $data_user['free_msg_used'] ?? 0;
-
     $text = $botdata["text"] ?? "";
     $chat_id = $botdata["chat"]["id"];
     $data_user = f("get_user")($botdata["from"]["id"]);
+    $free_msg_used = $data_user['free_msg_used'] ?? 0;
     if(empty($data_user['vip_until'])){
         $pesan_max = f("get_config")("pesan_max",0);
     }
