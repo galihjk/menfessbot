@@ -46,29 +46,29 @@ function handle_message_resend($botdata){
             }
             $jenis = "text";
         }
-        $mathced = false;
+        $mathced = "";
         foreach($prefixes as $prefix){
             if(f("str_is_diawali")($text,$prefix)){
-                $mathced = true;
+                $mathced = $prefix;
                 break;
             }
         }
         if(!$mathced){
             foreach($contains as $conval){
                 if(f("str_contains")($text,$conval)){
-                    $mathced = true;
+                    $mathced = $conval;
                     break;
                 }                
             }
 
         }
-        if($mathced){
+        if(!empty($mathced)){
             
             $chat_id = $botdata["chat"]["id"];
             $data_user = f("get_user")($botdata["from"]["id"]);
 
             $pesan_minchar = f("get_config")("pesan_minchar",0);
-            $msgcharcount = strlen(str_replace($prefix, "", $text));
+            $msgcharcount = strlen(str_replace($mathced, "", $text));
 
             $last_send = $data_user['last_send'] ?? null;
             $delay = f("get_config")("delay",0);
