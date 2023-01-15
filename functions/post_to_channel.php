@@ -9,7 +9,7 @@ function post_to_channel($botdata, $type, $fileid = ""){
     $chat_id = $botdata["chat"]["id"];
     if(f("check_word_filter")($text, $chat_id)){
         $resend_mode = f("get_config")("resend_mode","");
-        $message_id = $botdata["message"]["message_id"];
+        $message_id = $botdata["message_id"];
         if($resend_mode == 'forward'){
             $channel = f("get_config")("channel","");
             return f("bot_kirim_perintah")("forwardMessage",[

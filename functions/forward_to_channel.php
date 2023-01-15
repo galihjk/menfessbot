@@ -1,4 +1,5 @@
 <?php
+/*
 function forward_to_channel($from, $text, $msgid){
     if(f("check_word_filter")($text, $from)){
         $botuname = f("get_config")("botuname","");
@@ -12,7 +13,7 @@ function forward_to_channel($from, $text, $msgid){
             return f("bot_kirim_perintah")("forwardMessage",[
                 'chat_id'=>$channel,
                 'from_chat_id'=>$from,
-                'message_id'=>$textkirim,
+                'message_id'=>$msgid,
             ]);
         }
         elseif($resend_mode == 'resend'){
@@ -39,3 +40,4 @@ function forward_to_channel($from, $text, $msgid){
         return false;
     }
 }
+*/
