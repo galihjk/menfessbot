@@ -72,6 +72,7 @@ function handle_message_resend($botdata){
 
             $last_send = $data_user['last_send'] ?? null;
             $delay = f("get_config")("delay",0);
+            file_put_contents("log/debug.txt",print_r([$data_user, $last_send, $delay],true));
             if(!empty($last_send) and abs(time()-strtotime($last_send)) < $delay){
                 $textkirim = "Anda baru saja mengirim pesan, silakan tunggu ".($delay - (time()-strtotime($last_send)))." detik lagi.";
                 f("bot_kirim_perintah")("sendMessage",[
@@ -81,6 +82,7 @@ function handle_message_resend($botdata){
                 ]);
                 return true;
             }
+
             if($msgcharcount < $pesan_minchar){
                 $textkirim = "Jumlah karakter pesan anda tidak boleh kurang dari $pesan_minchar";
                 f("bot_kirim_perintah")("sendMessage",[
@@ -90,12 +92,15 @@ function handle_message_resend($botdata){
                 ]);
                 return true;
             }
+            file_put_contents("log/debug2.txt",print_r([$msgcharcount, $pesan_minchar, $delay],true));
+
             if(empty($data_user['vip_until'])){
                 $pesan_maxchar = f("get_config")("pesan_maxchar",0);
             }
             else{
                 $pesan_maxchar = f("get_config")("pesan_maxchar_vip",0);
             }
+
             if($msgcharcount > $pesan_maxchar){
                 $textkirim = "Jumlah karakter pesan anda tidak boleh lebih dari $pesan_maxchar";
                 f("bot_kirim_perintah")("sendMessage",[
@@ -105,6 +110,7 @@ function handle_message_resend($botdata){
                 ]);
                 return true;
             }
+
             if($jenis == "text"){
                 return f("handle_message_send_text")($botdata);
             }
