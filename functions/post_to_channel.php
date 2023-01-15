@@ -10,10 +10,10 @@ function post_to_channel($botdata, $type, $fileid = ""){
     if(f("check_word_filter")($text, $chat_id)){
         $resend_mode = f("get_config")("resend_mode","");
         $message_id = $botdata["message_id"];
+        $last_send = f("str_dbtime")();
+        f("db_q")("update users set last_send=$last_send where id='$chat_id'");
         if($resend_mode == 'forward'){
             $channel = f("get_config")("channel","");
-            $last_send = f("str_dbtime")();
-            f("db_q")("update users set last_send=$last_send where id='$chat_id'");
             return f("bot_kirim_perintah")("forwardMessage",[
                 'chat_id'=>$channel,
                 'from_chat_id'=>$chat_id,

@@ -110,7 +110,7 @@ function handle_message_resend($botdata){
                 ]);
                 return true;
             }
-
+            
             if($jenis == "text"){
                 return f("handle_message_send_text")($botdata);
             }
