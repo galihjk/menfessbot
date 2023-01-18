@@ -17,7 +17,7 @@ function handle_callback_query_vip($botdata){
         $media_max = f("get_config")("media_max",0);
         $media_max_vip = f("get_config")("media_max_vip",0);
         $pesan_maxchar = f("get_config")("pesan_maxchar",0);
-        $pesan_maxchar_vip = f("pesan_maxchar_vip")("pesan_maxchar_vip",0);
+        $pesan_maxchar_vip = f("get_config")("pesan_maxchar_vip",0);
         
         $textkirim = "<b>Fitur 🎖PREMIUM:</b>\n\n";
         $textkirim .= "<b>Kuota Gratis Harian</b>\n";
