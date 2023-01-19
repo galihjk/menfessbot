@@ -1,11 +1,12 @@
 <?php
-function check_word_filter($word, $from){
+function check_word_filter($text, $from){
     $wordfilter = strtolower(f("get_config")("wordfilter",""));
-    $wordfilterarr = explode(",",$wordfilter);
-    $word1 = " ".strtolower(preg_replace('/[^a-zA-Z]/', " ", $word))." ";
+    $wordfilterarr = explode(",",strtolower($wordfilter));
+    $text = strtolower($text);
+    $text1 = preg_replace('/[^a-zA-Z]/', " ", $text);
     foreach($wordfilterarr as $item){
-        if(f("str_contains")($word1, " $item ")
-        or f("str_contains")(" $word ", " $item ")
+        if(f("str_contains")(" $text1 ", " $item ")
+        or f("str_contains")(" $text ", " $item ")
         ){
             f("bot_kirim_perintah")("sendMessage",[
                 'chat_id'=>$from,
