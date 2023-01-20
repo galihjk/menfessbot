@@ -21,10 +21,10 @@ function handle_message_send_media($botdata, $jenis, $fileid){
     $sent_message_id = "";
     if($free_media_used < $media_max){
         $free_media_used++;
-        f("db_q")("update users set free_media_used = $free_media_used where id = '$chat_id'");
         // $channelpost = f("post_media_to_channel")($chat_id,$caption,$jenis,$fileid);
         $channelpost = f("post_to_channel")($botdata, $jenis, $fileid);
         if(!empty($channelpost['result']['message_id'])){
+            f("db_q")("update users set free_media_used = $free_media_used where id = '$chat_id'");
             $sent_message_id = $channelpost['result']['message_id'];
             $success_text = "<b>Berhasil!</b>\nSisa kuota gratis: ".($media_max-$free_media_used);
         }
@@ -34,10 +34,10 @@ function handle_message_send_media($botdata, $jenis, $fileid){
         $coin = $data_user['coin'] ?? 0;
         if($coin >= $biaya){
             $coin -= $biaya;
-            f("db_q")("update users set coin=$coin where id='".$data_user['id']."'");
             // $channelpost = f("post_media_to_channel")($chat_id,$caption,$jenis,$fileid);
             $channelpost = f("post_to_channel")($botdata, $jenis, $fileid);
             if(!empty($channelpost['result']['message_id'])){
+                f("db_q")("update users set coin=$coin where id='".$data_user['id']."'");
                 $sent_message_id = $channelpost['result']['message_id'];
                 $success_text = "<b>Berhasil!</b>\nBiaya: $biaya 🪙\nSisa: $coin 🪙";                        
             }
