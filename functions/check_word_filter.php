@@ -2,6 +2,7 @@
 function check_word_filter($text, $from){
     $wordfilter = strtolower(f("get_config")("wordfilter",""));
     $wordfilterarr = explode(",",strtolower($wordfilter));
+    $text = strtolower($text);
     foreach($wordfilterarr as $item){
         if($item != ""){
             if(f("str_contains")($text,$item)){
