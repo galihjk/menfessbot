@@ -1,6 +1,6 @@
 <?php
 function check_link($text, $from){
-    if(f("get_config")("allow_link",false)){
+    if(!f("get_config")("allow_link",false)){
         $result = f("bot_kirim_perintah")("sendMessage",[
             'chat_id'=>$from,
             'text'=>$text,
