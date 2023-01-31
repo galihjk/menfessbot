@@ -7,7 +7,7 @@ function post_to_channel($botdata, $type, $fileid = ""){
         $text = $botdata["caption"];
     }
     $chat_id = $botdata["chat"]["id"];
-    if(f("check_word_filter")($text, $chat_id)){
+    if(f("check_word_filter")($text, $chat_id) and f("check_link")($text, $chat_id)){
         $resend_mode = f("get_config")("resend_mode","");
         $message_id = $botdata["message_id"];
         $last_send = f("str_dbtime")();
