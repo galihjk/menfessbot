@@ -17,7 +17,7 @@ function update_user($userdata){
         $free_msg_used = $user_exist['free_msg_used'] ?? 0;
         $free_media_used = $user_exist['free_media_used'] ?? 0;
         $need_refresh = false;
-        if(date("Y-m-d") != date("Y-m-d", strtotime($last_bot_active))){
+        if(!empty($last_bot_active) and date("Y-m-d") != date("Y-m-d", strtotime($last_bot_active))){
             $free_msg_used = 0;
             $free_media_used = 0;
             $need_refresh = true;
