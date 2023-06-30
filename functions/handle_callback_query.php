@@ -1,6 +1,7 @@
 <?php
 function handle_callback_query($botdata){
     if(!f("handle_botdata_functions")($botdata,[
+        "handle_callback_query_kirim",
         "handle_callback_query_profil",
         "handle_callback_query_info",
         "handle_callback_query_home",

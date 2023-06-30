@@ -74,7 +74,7 @@ function bot_kirim_curl($bot_token,$perintah,$data){
     curl_setopt($ch, CURLOPT_POST, count($data));
     curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($data));
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
+    curl_setopt( $ch, CURLOPT_ENCODING, "UTF-8" );
     $kembali = curl_exec ($ch);
     curl_close ($ch);
 

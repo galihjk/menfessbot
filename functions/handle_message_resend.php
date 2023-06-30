@@ -118,18 +118,23 @@ function handle_message_resend($botdata){
                 ]);
                 return true;
             }
+            $kirimjenis = $jenis;
+            if(!empty($fileid)){
+                $kirimjenis .= "_$fileid";
+            }
+
+            f("bot_kirim_perintah")("sendMessage",[
+                "chat_id"=>$chat_id,
+                "text"=>"KONFIRMASI\n<i>*Klik tombol kirim untuk melanjutkan.</i>",
+                "parse_mode"=>"HTML",
+                "reply_to_message_id"=>$botdata["message_id"],
+                'reply_markup'=>f("gen_inline_keyboard")([
+                    ['✅ KIRIM', "kirim_$kirimjenis"]
+                ]),
+            ]);
+
+            return true;
             
-            if($jenis == "text"){
-                return f("handle_message_send_text")($botdata);
-            }
-            else{
-                if(empty($jenis) or empty($fileid)){
-                    return false;
-                }
-                else{
-                    return f("handle_message_send_media")($botdata, $jenis, $fileid);
-                }
-            }
         }
     }
     return false;
