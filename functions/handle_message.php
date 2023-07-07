@@ -1,5 +1,11 @@
 <?php
 function handle_message($botdata){
+    if(!empty($botdata["from"]["first_name"])){
+        $botdata["from"]["first_name"] = str_replace("<", "&lt;", $botdata["from"]["first_name"]);
+    }
+    if(!empty($botdata["from"]["last_name"])){
+        $botdata["from"]["last_name"] = str_replace("<", "&lt;", $botdata["from"]["last_name"]);
+    }
     if(f("is_private")($botdata)){
         $chat_id = $botdata["chat"]["id"];
         if(f("cek_sudah_subscribe")($chat_id)){
