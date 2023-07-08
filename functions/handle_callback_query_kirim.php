@@ -38,7 +38,7 @@ function handle_callback_query_kirim($botdata){
                 }
             }
         }
-        f("data_save")("waitingsendconfirm$chat_id",0);
+        f("data_delete")("waitingsendconfirm$chat_id",0);
         return true;
     }
     elseif(!empty($botdata["data"]) 
@@ -57,7 +57,7 @@ function handle_callback_query_kirim($botdata){
             'chat_id'=>$chat_id,
             'message_id'=>$message_id,
         ]);
-        f("data_save")("waitingsendconfirm$chat_id",0);
+        f("data_delete")("waitingsendconfirm$chat_id",0);
         return true;
     }
     return false;
