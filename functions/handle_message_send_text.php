@@ -41,7 +41,7 @@ function handle_message_send_text($botdata){
                 'chat_id'=>$chat_id,
                 'text'=>"Gagal, jatah gratis sudah habis dan koin tidak cukup.",
                 "parse_mode"=>"HTML",
-                "reply_to_message_id"=>$botdata["message"]["message_id"],
+                // "reply_to_message_id"=>$botdata["message"]["message_id"],
             ]);
         }
     }

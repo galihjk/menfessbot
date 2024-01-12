@@ -29,6 +29,8 @@ function handle_messagegroup_comments($botdata){
             else{
                 $komentator = $botdata['from']['first_name'] . (empty($botdata['from']['username'])?'':" (@".$botdata['from']['username'].")");
             }
+            $komentator = str_replace("<","&lt;",$komentator);
+            if(empty($reply_to_message_id)) return true;
             $url = f("channel_url")("/$reply_to_message_id?comment=".$botdata['message_id']);
             if($oleh){
                 f("bot_kirim_perintah")("sendMessage",[

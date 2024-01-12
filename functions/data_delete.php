@@ -1,5 +1,6 @@
 <?php
 function data_delete($name){
     $filename="data/$name.json";
-	return unlink($filename); 
+    if(file_exists($filename)) return unlink($filename);
+    return false;
 }

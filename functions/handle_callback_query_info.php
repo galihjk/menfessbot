@@ -25,7 +25,7 @@ function handle_callback_query_info($botdata){
         
         $message_id = $botdata["message"]["message_id"];
         $chat_id = $botdata["message"]["chat"]["id"];
-        $textkirim .= "";
+        $textkirim = "";
         $textkirim .= "<b>Kuota Gratis Harian</b>\n";
         $textkirim .= "Pesan: $pesan_max ($pesan_max_vip untuk 🎖PREMIUM)\n";
         $textkirim .= "Media: $media_max ($media_max_vip untuk 🎖PREMIUM)\n";
@@ -53,7 +53,7 @@ function handle_callback_query_info($botdata){
         f("bot_kirim_perintah")("editMessageText",[
             'chat_id'=>$chat_id,
             'message_id'=>$message_id,
-            'text'=>$textkirim."\n\n".f("str_decrypt")("imVOVhrxkT9NNRoKQZkVpwXx6wqvlJScsk5MrYEgJSKPKPoo3/lALnxmzyiY"),
+            'text'=>$textkirim, //."\n\n".f("str_decrypt")("imVOVhrxkT9NNRoKQZkVpwXx6wqvlJScsk5MrYEgJSKPKPoo3/lALnxmzyiY"),
             "parse_mode"=>"HTML",
             "disable_web_page_preview"=>true,
             'reply_markup'=>f("gen_inline_keyboard")([
